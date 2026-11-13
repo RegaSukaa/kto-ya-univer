@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -328,7 +329,7 @@ private fun OnlineGame(state: OnlineUiState, vm: OnlineViewModel) {
     val card = state.myCharacter?.toCardModel()
     val remaining = state.showRemainingMs
     val seconds = ceil(remaining / 1000.0).toInt()
-    Box(Modifier.fillMaxSize().background(Color.Black)) {
+    Box(Modifier.fillMaxSize().background(Color.Black).systemBarsPadding()) {
         if (state.hidden) {
             Column(
                 Modifier.fillMaxSize().clickable { vm.toggleHidden() }.padding(24.dp),
@@ -388,7 +389,7 @@ private fun OnlineGame(state: OnlineUiState, vm: OnlineViewModel) {
 @Composable
 private fun OnlineReveal(state: OnlineUiState, vm: OnlineViewModel, onBack: () -> Unit) {
     Column(
-        Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)
+        Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).systemBarsPadding()
             .verticalScroll(rememberScrollState()).padding(20.dp)
     ) {
         Text(stringResource(R.string.online_reveal), fontSize = 30.sp, fontWeight = FontWeight.Bold)

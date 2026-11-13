@@ -65,6 +65,12 @@ android {
     }
 }
 
+// Robolectric-песочница делит SQLite между классами: без изоляции один тест ломает другой.
+tasks.withType<Test>().configureEach {
+    forkEvery = 1
+    maxParallelForks = 1
+}
+
 dependencies {
     val composeBom = platform("androidx.compose:compose-bom:2024.09.03")
     implementation(composeBom)

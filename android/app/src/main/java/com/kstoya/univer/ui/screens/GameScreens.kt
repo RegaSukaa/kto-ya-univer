@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -325,7 +326,7 @@ fun ReviewScreen(
     onExit: () -> Unit
 ) {
     var changeFor by remember { mutableStateOf<RoundInfo?>(null) }
-    Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).systemBarsPadding()) {
         Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 IconButton(onClick = onExit, modifier = Modifier.size(40.dp)) {
@@ -432,7 +433,7 @@ fun SummaryScreen(
 ) {
     val ctx = LocalContext.current
     Column(
-        Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)
+        Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).systemBarsPadding()
             .verticalScroll(rememberScrollState()).padding(20.dp)
     ) {
         Text(
