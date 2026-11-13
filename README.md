@@ -22,8 +22,10 @@
 - Подпись: `CN=Android Debug` SHA-256 `c55f48014ba06ee465b2037b5477a00edad4b4721a6d1e737e1c130684e4ef6c`
   (ключ лежит в репозитории — обновления ставятся поверх предыдущей версии).
 
-## Что нового в 1.1
+## Что нового в 1.2
 
+- **Иконка и логотип.** Adaptive icon во всех плотностях из `design/logo_source.png`,
+  `py tools/make_icons.py`; логотип в шапке главного экрана и в «О приложении».
 - **Без записи голоса.** Готовые реплики лежат в `assets/voices/<slot>/` и выбираются случайно.
   Банк пуст → встроенный WAV. Тишины нет.
 - **Несколько фото на человека.** `assets/characters/<id>/photo_N.png`, на каждый раунд выбирается
@@ -37,7 +39,7 @@
 ```
 android/    Kotlin 2.0.21 + Jetpack Compose, Room, Coil, ML Kit subject-segmentation
 server/     Node 20 + ws, комнаты в памяти (без БД и без фото)
-tools/      gen_placeholders.py, gen_tones.py, prepare_materials.py, check_strings.py
+tools/      gen_placeholders.py, gen_tones.py, prepare_materials.py, make_icons.py, check_strings.py
 materials/  шаблон: люди.csv, фото/<папка>/, голоса/<slot>/
 sets/       пример набора .ktya
 docs/       TIMINGS.md, DESIGN.md, QA.md, screens/*.png

@@ -16,6 +16,7 @@ import com.kstoya.univer.game.RoundInfo
 import com.kstoya.univer.game.SummaryStats
 import com.kstoya.univer.ui.components.CharacterCard
 import com.kstoya.univer.ui.components.toCardModel
+import com.kstoya.univer.ui.screens.HomeScreen
 import com.kstoya.univer.ui.screens.ReviewScreen
 import com.kstoya.univer.ui.screens.SummaryScreen
 import com.kstoya.univer.ui.theme.KtoYaTheme
@@ -57,6 +58,19 @@ class ScreenshotTest {
         tag2 = "строгий", kind = "teacher", bgPreset = 2,
         initials = "ДС", assetPhoto = "characters/teacher_smirnov.png", placeholder = true, source = "assets"
     )
+
+    @Test
+    fun homeWithLogo() {
+        compose.setContent {
+            KtoYaTheme(dark = true) {
+                HomeScreen(
+                    characters = listOf(friend, teacher),
+                    onLocal = {}, onOnline = {}, onLibrary = {}, onSettings = {}
+                )
+            }
+        }
+        save("s1_home")
+    }
 
     @Test
     fun cardFriend() {

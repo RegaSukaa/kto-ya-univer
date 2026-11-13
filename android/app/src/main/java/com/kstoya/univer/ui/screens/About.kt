@@ -1,9 +1,11 @@
 package com.kstoya.univer.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -19,6 +21,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -46,6 +49,12 @@ fun AboutScreen(onBack: () -> Unit) {
         Column(
             Modifier.padding(pad).fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp)
         ) {
+            Image(
+                painter = painterResource(R.drawable.logo_art),
+                contentDescription = null,
+                modifier = Modifier.size(88.dp)
+            )
+            Spacer(Modifier.height(8.dp))
             Text(stringResource(R.string.app_name), fontSize = 28.sp, fontWeight = FontWeight.Bold)
             Text(stringResource(R.string.settings_version, BuildConfig.VERSION_NAME), fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.height(20.dp))
