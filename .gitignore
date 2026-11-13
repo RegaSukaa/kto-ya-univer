@@ -1,0 +1,14 @@
+# build outputs
+build/
+.gradle/
+local.properties
+*.iml
+.idea/
+.DS_Store
+/node_modules/
+server/node_modules/
+# NB: not ignoring data/ — the Kotlin package .../data/ lives there
+__pycache__/
+
+# build logs
+*.log

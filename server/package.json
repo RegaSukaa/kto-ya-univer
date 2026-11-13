@@ -1,0 +1,16 @@
+{
+  "name": "kto-ya-univer-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Комнаты для онлайн-режима «Кто Я: Универ». В памяти, без БД, без фото.",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

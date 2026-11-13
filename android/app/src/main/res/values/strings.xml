@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Кто Я: Универ</string>
+
+    <!-- S1 главное меню -->
+    <string name="home_local">Играть на одном телефоне</string>
+    <string name="home_online">Онлайн, у каждого свой телефон</string>
+    <string name="home_library">Персонажи (%1$d)</string>
+    <string name="home_hint">Телефон ко лбу, остальные подсказывают</string>
+    <string name="home_settings">Настройки</string>
+    <string name="home_offline">Локальный режим работает без интернета</string>
+    <string name="home_need_chars">Нужно минимум 2 персонажа</string>
+    <string name="home_add_chars">Добавить персонажей</string>
+
+    <!-- S0 онбординг -->
+    <string name="onboarding_next">Дальше</string>
+    <string name="onboarding_skip">Пропустить</string>
+    <string name="onboarding_1_title">Кто Я: Универ Edition</string>
+    <string name="onboarding_1_body">Телефон ко лбу, остальные подсказывают. Работает без интернета.</string>
+    <string name="onboarding_2_title">Сначала нужны лица</string>
+    <string name="onboarding_2_body">Добавь друзей и преподов — по одному фото на человека. Или играй с готовыми заглушками.</string>
+    <string name="onboarding_add_chars">Добавить персонажей</string>
+    <string name="onboarding_later">Позже</string>
+    <string name="onboarding_play_placeholder">Играть с заглушками</string>
+    <string name="onboarding_3_title">Голос группы</string>
+    <string name="onboarding_3_body">Запиши «Три! Два! Один! Погнали!», «Красавчик!», «Эх, не угадал». Без записи будут синтезированные звуки.</string>
+    <string name="onboarding_record">Записать</string>
+
+    <!-- S2 состав -->
+    <string name="setup_title">Состав</string>
+    <string name="setup_players">Игроки</string>
+    <string name="setup_player_n">Игрок %1$d</string>
+    <string name="setup_show_time">Показ карточки</string>
+    <string name="setup_secs">%1$d с</string>
+    <string name="setup_alternate">Чередовать друзей и преподов</string>
+    <string name="setup_mark_after">Отмечать результат после показа</string>
+    <string name="setup_deck">Колода: %1$d карточек</string>
+    <string name="setup_deck_kinds">%1$d друзей · %2$d преподов</string>
+    <string name="setup_deck_warn">Карточек меньше, чем игроков — кому-то достанется повтор</string>
+    <string name="setup_preset_apply">Прошлый состав: %1$s</string>
+    <string name="setup_preset_save">Сохранить состав</string>
+    <string name="setup_preset_title">Название состава</string>
+    <string name="setup_start">Поехали</string>
+    <string name="setup_need_players">Заполни минимум два имени</string>
+    <string name="setup_need_characters">Нужно минимум два персонажа</string>
+    <string name="setup_clear">Очистить</string>
+    <string name="setup_deck_choose">Колода</string>
+
+    <!-- S3a/S3b -->
+    <string name="pass_title">%1$s, твой выход</string>
+    <string name="pass_body">Возьми телефон, поверни экран к остальным и приложи ко лбу</string>
+    <string name="pass_ready">Готово</string>
+    <string name="pass_progress">Игрок %1$d из %2$d</string>
+    <string name="countdown_go">Погнали!</string>
+    <string name="countdown_cancel">Отменить показ?</string>
+    <string name="countdown_cancel_yes">Прервать раунд</string>
+    <string name="countdown_cancel_no">Отмена</string>
+    <string name="show_hint">Остальные подсказывают. Не подглядывай!</string>
+    <string name="show_hidden">Карточка скрыта. Нажми, чтобы вернуть.</string>
+
+    <!-- S5 -->
+    <string name="mark_title">Ты угадал?</string>
+    <string name="mark_guessed">Угадал</string>
+    <string name="mark_missed">Не угадал</string>
+    <string name="mark_skip">Пропустить</string>
+
+    <!-- S6/S7 -->
+    <string name="review_title">Разбор. Кто кем был</string>
+    <string name="review_subtitle">Нажми на карточку, чтобы показать ещё раз</string>
+    <string name="review_status_guessed">Угадал</string>
+    <string name="review_status_missed">Не угадал</string>
+    <string name="review_status_skipped">Пропустил</string>
+    <string name="review_status_pending">Не прошли</string>
+    <string name="review_next_round">Ещё раунд</string>
+    <string name="review_finish">Закончить игру</string>
+    <string name="review_reshow_hint">Повторный показ</string>
+    <string name="review_close">Закрыть</string>
+    <string name="review_change_result">Изменить результат</string>
+
+    <!-- S8 -->
+    <string name="summary_title">Итоги</string>
+    <string name="summary_score">Угадали %1$d из %2$d</string>
+    <string name="summary_winner">Лучший: %1$s</string>
+    <string name="summary_draw">Ничья: %1$s</string>
+    <string name="summary_share">Поделиться</string>
+    <string name="summary_menu">В меню</string>
+    <string name="summary_local_only">Результаты хранятся только на этом телефоне</string>
+    <string name="summary_stats_kinds">Друзей угадали %1$d/%2$d · Преподов %3$d/%4$d</string>
+    <string name="summary_avg_show">Средний показ %1$d с</string>
+    <string name="summary_no_score">Игра без счёта: кто кем был</string>
+    <string name="summary_round_no">Раунд %1$d</string>
+
+    <!-- S9 библиотека -->
+    <string name="lib_title">Персонажи</string>
+    <string name="lib_empty">Пока никого. Добавь друзей и преподов — по одному фото на человека.</string>
+    <string name="lib_add">Добавить</string>
+    <string name="lib_filter_all">Все</string>
+    <string name="lib_filter_friends">Друзья</string>
+    <string name="lib_filter_teachers">Преподы</string>
+    <string name="lib_no_photo">нет фото</string>
+    <string name="lib_import">Импортировать набор</string>
+    <string name="lib_export">Поделиться набором</string>
+    <string name="lib_delete_confirm">Удалить «%1$s»? Это действие нельзя отменить.</string>
+    <string name="lib_duplicate">Дублировать</string>
+    <string name="lib_edit">Изменить</string>
+    <string name="lib_delete">Удалить</string>
+    <string name="lib_search_hint">Поиск по имени или тегу</string>
+    <string name="lib_sort">Сортировка</string>
+    <string name="lib_sort_name">По имени</string>
+    <string name="lib_sort_date">По дате</string>
+    <string name="lib_sort_kind">По типу</string>
+    <string name="lib_count">%1$d персонажей · %2$d друзей · %3$d преподов</string>
+
+    <!-- S10 редактор -->
+    <string name="edit_title_new">Новый персонаж</string>
+    <string name="edit_title_edit">Изменить персонажа</string>
+    <string name="edit_photo">Фото</string>
+    <string name="edit_photo_add">Добавить фото</string>
+    <string name="edit_photo_gallery">Галерея</string>
+    <string name="edit_photo_camera">Камера</string>
+    <string name="edit_photo_remove">Убрать фото</string>
+    <string name="edit_cutout">Вырезать фон</string>
+    <string name="edit_name">Имя</string>
+    <string name="edit_name_hint">Виктор Павлович</string>
+    <string name="edit_kind">Кто это</string>
+    <string name="edit_kind_friend">Друг</string>
+    <string name="edit_kind_teacher">Препод</string>
+    <string name="edit_kind_other">Другое</string>
+    <string name="edit_tags">Теги</string>
+    <string name="edit_tag1_hint">Группа ИТ-21</string>
+    <string name="edit_tag2_hint">любитель поспать на парах</string>
+    <string name="edit_tag3_hint">Доцент кафедры матана</string>
+    <string name="edit_bg">Фон карточки</string>
+    <string name="edit_save">Сохранить</string>
+    <string name="edit_delete">Удалить</string>
+    <string name="edit_duplicate_name">Персонаж с таким именем уже есть. Это не запрещено.</string>
+    <string name="edit_consent">Загружая фото, ты подтверждаешь, что человек не против.</string>
+    <string name="cutout_progress">Вырезаю фон… %1$d из %2$d</string>
+    <string name="cutout_failed">Не получилось вырезать фон — оставил фото как есть</string>
+    <string name="crop_title">Кадрирование</string>
+    <string name="crop_hint">Двумя пальцами — масштаб, одним — сдвиг</string>
+    <string name="crop_done">Готово</string>
+    <string name="crop_zoom">Масштаб</string>
+
+    <!-- Онлайн -->
+    <string name="online_title">Онлайн</string>
+    <string name="online_create">Создать игру</string>
+    <string name="online_join">Войти по коду</string>
+    <string name="online_code_label">Код комнаты</string>
+    <string name="online_code_share">Поделиться кодом</string>
+    <string name="online_code_copy">Копировать</string>
+    <string name="online_copied">Скопировано</string>
+    <string name="online_lobby">Лобби</string>
+    <string name="online_wait_host">Ждём хоста…</string>
+    <string name="online_ready">Готов</string>
+    <string name="online_not_ready">Не готов</string>
+    <string name="online_start">Начать</string>
+    <string name="online_waiting_players">Нужно минимум два игрока</string>
+    <string name="online_hidden">Карточка скрыта. Нажми, чтобы вернуть.</string>
+    <string name="online_reveal">Кто кем был</string>
+    <string name="online_reveal_btn">Раскрыть всех</string>
+    <string name="online_server">Сервер</string>
+    <string name="online_server_reset">Сбросить</string>
+    <string name="online_waking">Сервер просыпается…</string>
+    <string name="online_connecting">Подключаемся…</string>
+    <string name="online_connected">Связь есть</string>
+    <string name="online_your_name">Твоё имя</string>
+    <string name="online_join_by_code">Код и имя</string>
+    <string name="online_leave">Выйти</string>
+    <string name="online_ended">Игра закончилась</string>
+    <string name="online_ended_body">Комната закрыта. Создай новую — состав можно взять прежний.</string>
+    <string name="online_new_room">Создать новую</string>
+    <string name="online_share_code_text">Заходи в Кто Я: код %1$s</string>
+    <string name="online_deck_mismatch">У вас разные наборы карточек: персонажи могут отличаться</string>
+    <string name="online_you">Ты</string>
+    <string name="online_host_badge">хост</string>
+    <string name="online_guess_yes">Я угадал</string>
+    <string name="online_guess_no">Не угадал</string>
+    <string name="online_waiting_mark">Отметь результат, остальные ждут</string>
+    <string name="online_name_empty">Введи имя</string>
+    <string name="online_code_bad">Код — 6 символов</string>
+    <string name="online_countdown">Приготовься…</string>
+    <string name="online_round">Раунд %1$d</string>
+
+    <!-- Настройки -->
+    <string name="settings_title">Настройки</string>
+    <string name="settings_game">Игра</string>
+    <string name="settings_show_time">Показ карточки</string>
+    <string name="settings_alternate">Чередовать друзей и преподов</string>
+    <string name="settings_mark_after">Отмечать результат после показа</string>
+    <string name="settings_tap_hide">Скрывать карточку по тапу (онлайн)</string>
+    <string name="settings_sound_block">Звук и вибрация</string>
+    <string name="settings_sound">Звук</string>
+    <string name="settings_vibrate">Вибрация</string>
+    <string name="settings_voice_volume">Громкость реплик</string>
+    <string name="settings_voice">Голос группы</string>
+    <string name="settings_data">Данные</string>
+    <string name="settings_export">Экспортировать набор</string>
+    <string name="settings_import">Импортировать набор</string>
+    <string name="settings_wipe">Стереть мои данные</string>
+    <string name="settings_wipe_body">Удалятся все карточки, фото и пресеты на этом телефоне. Отменить будет нельзя.</string>
+    <string name="settings_wipe_confirm">Стереть всё?</string>
+    <string name="settings_wipe_yes">Стереть</string>
+    <string name="settings_wipe_done">Данные стёрты. Банк заглушек вернётся при следующем запуске.</string>
+    <string name="settings_about">О приложении</string>
+    <string name="settings_placeholders">Заглушки</string>
+    <string name="settings_language">Язык</string>
+    <string name="settings_version">Версия %1$s</string>
+    <string name="settings_restart">Приложение перезапустится, чтобы применить язык</string>
+
+    <!-- Голосовой пак -->
+    <string name="voice_title">Голос группы</string>
+    <string name="voice_body">4 реплики. Запиши своим голосом — игра будет звучать вашей компанией. Голос останется только на этом телефоне.</string>
+    <string name="voice_slot_start">«Три! Два! Один! Погнали!»</string>
+    <string name="voice_slot_guessed">«Красавчик!»</string>
+    <string name="voice_slot_missed">«Эх, не угадал»</string>
+    <string name="voice_slot_final">«Всё, хватит, играем ещё»</string>
+    <string name="settings_record">Записать</string>
+    <string name="settings_listen">Прослушать</string>
+    <string name="settings_rerecord">Перезаписать</string>
+    <string name="settings_delete_recording">Удалить</string>
+    <string name="voice_recording">Идёт запись…</string>
+    <string name="voice_max">Максимум 4 секунды</string>
+    <string name="voice_mic_reason">Микрофон нужен только для записи реплик. Ничего не отправляется в сеть.</string>
+    <string name="voice_slot_empty">Пусто — играет встроенный звук</string>
+    <string name="voice_slot_recorded">Записано</string>
+    <string name="voice_mic_denied">Без микрофона запись не получится. Разреши доступ в настройках Android.</string>
+
+    <!-- Заглушки S14 -->
+    <string name="ph_title">Заглушки</string>
+    <string name="ph_photos">Фото: %1$d своих, %2$d заглушек</string>
+    <string name="ph_voices">Голоса: %1$d из %2$d записано</string>
+    <string name="ph_refresh">Обновить банк персонажей</string>
+    <string name="ph_refreshed">Банк обновлён: %1$d персонажей</string>
+    <string name="ph_own">своё фото</string>
+    <string name="ph_stub">заглушка</string>
+    <string name="ph_missing">нет файла</string>
+    <string name="ph_changed">изменено вручную</string>
+    <string name="ph_howto_title">Как подставить свои лица и голоса</string>
+    <string name="ph_howto_1">1. Положи фото friend_ivan.png в android/app/src/main/assets/characters/ — PNG с прозрачным фоном, ≥ 800×800, лицо по центру.</string>
+    <string name="ph_howto_2">2. Положи голос friend_ivan_win.m4a в android/app/src/main/assets/sounds/ (AAC, ≤ 3 с).</string>
+    <string name="ph_howto_3">3. Новый человек — добавь объект в characters.json (id, name, kind, tags, photo, initials).</string>
+    <string name="ph_howto_4">4. Собери APK заново — настоящие лица уже внутри, код менять не нужно.</string>
+
+    <!-- Импорт/экспорт -->
+    <string name="import_title">Импорт набора</string>
+    <string name="import_conflict">В наборе есть персонажи с такими же id</string>
+    <string name="import_keep">Оставить локальные</string>
+    <string name="import_replace">Заменить</string>
+    <string name="import_duplicate">Оставить оба</string>
+    <string name="import_done">Импортировано: %1$d</string>
+    <string name="import_failed">Не удалось прочитать набор. Проверь, что файл скачался целиком.</string>
+    <string name="export_title">Поделиться набором</string>
+    <string name="export_done">Набор готов: %1$d карточек</string>
+    <string name="export_empty">Нечего экспортировать — нет персонажей</string>
+
+    <string name="share_summary_text">Кто Я: Универ — угадали %1$d из %2$d</string>
+    <string name="share_subject">Кто Я: Универ</string>
+
+    <string name="about_title">О приложении</string>
+    <string name="about_privacy">Фото не покидают телефон. Локальный режим работает без интернета.</string>
+    <string name="about_consent">Используйте фото людей, которые согласны. Это приватная игра для своей компании, а не публичный сервис.</string>
+    <string name="about_legal">Ст. 152.1 ГК РФ: изображение гражданина охраняется. Поэтому игра не публикуется в Google Play и RuStore, а раздаётся APK друзьям.</string>
+    <string name="about_offline">Без аналитики, без рекламы, без аккаунтов.</string>
+    <string name="about_howto">Как снимать лица: фронтальная камера, однотонный фон, свет спереди. Эмоция важнее качества. Не сжимай фото в мессенджере.</string>
+
+    <!-- Ошибки -->
+    <string name="err_room_not_found">Комната не найдена. Проверь код.</string>
+    <string name="err_room_full">В комнате уже 10 человек</string>
+    <string name="err_name_taken">Такое имя уже занято</string>
+    <string name="err_already_started">Игра уже началась</string>
+    <string name="err_offline">Нет связи. Локальный режим работает без интернета.</string>
+    <string name="err_not_host">Это может только хост</string>
+    <string name="err_bad_version">Версия приложения не подходит к серверу</string>
+    <string name="err_generic">Не получилось. Попробуй ещё раз.</string>
+    <string name="err_skew">Время на телефоне сильно отличается от сервера</string>
+
+    <!-- Общее -->
+    <string name="common_cancel">Отмена</string>
+    <string name="common_ok">Ок</string>
+    <string name="common_delete">Удалить</string>
+    <string name="common_back">Назад</string>
+    <string name="common_done">Готово</string>
+    <string name="common_share">Поделиться</string>
+    <string name="common_copy">Копировать</string>
+    <string name="common_close">Закрыть</string>
+    <string name="common_yes">Да</string>
+    <string name="common_no">Нет</string>
+    <string name="common_loading">Загрузка…</string>
+    <string name="setup_preset_apply_btn">Применить</string>
+    <string name="summary_show">Итоги</string>
+    <string name="review_show_summary">К итогам</string>
+    <string name="settings_theme">Тёмная тема</string>
+    <string name="lang_ru">Русский</string>
+    <string name="lang_en">English</string>
+</resources>

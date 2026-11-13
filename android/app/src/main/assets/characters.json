@@ -1,0 +1,208 @@
+{
+ "format": "ktya-assets/1",
+ "version": 1,
+ "characters": [
+  {
+   "id": "friend_ivan",
+   "name": "Иван Петров",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "ИП",
+   "tags": [
+    "Группа ИТ-21",
+    "любитель поспать на парах"
+   ],
+   "photo": "characters/friend_ivan.png",
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": true
+  },
+  {
+   "id": "friend_anya",
+   "name": "Аня Соколова",
+   "kind": "friend",
+   "bgPreset": 3,
+   "initials": "АС",
+   "tags": [
+    "Староста",
+    "знает всё раньше препода"
+   ],
+   "photo": "characters/friend_anya.png",
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": true
+  },
+  {
+   "id": "friend_dima",
+   "name": "Дима Крылов",
+   "kind": "friend",
+   "bgPreset": 4,
+   "initials": "ДК",
+   "tags": [
+    "Вечно с энергетиком",
+    "прогулял 3 пары из 4"
+   ],
+   "photo": "characters/friend_dima.png",
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": true
+  },
+  {
+   "id": "friend_lesha",
+   "name": "Лёша Морозов",
+   "kind": "friend",
+   "bgPreset": 2,
+   "initials": "ЛМ",
+   "tags": [
+    "Спит на первой парте",
+    "мастер мемов"
+   ],
+   "photo": "characters/friend_lesha.png",
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": true
+  },
+  {
+   "id": "friend_nastya",
+   "name": "Настя Волкова",
+   "kind": "friend",
+   "bgPreset": 1,
+   "initials": "НВ",
+   "tags": [
+    "Конспекты как печатные",
+    "ни разу не сдала в срок"
+   ],
+   "photo": "characters/friend_nastya.png",
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": true
+  },
+  {
+   "id": "friend_mark",
+   "name": "Марк Хайруллин",
+   "kind": "friend",
+   "bgPreset": 5,
+   "initials": "МХ",
+   "tags": [
+    "Ходит на физру только за зачёткой"
+   ],
+   "photo": "characters/friend_mark.png",
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": true
+  },
+  {
+   "id": "friend_sonya",
+   "name": "Соня Гараева",
+   "kind": "friend",
+   "bgPreset": 3,
+   "initials": "СГ",
+   "tags": [
+    "Приносит кофе всей группе",
+    "вечно опаздывает"
+   ],
+   "photo": "characters/friend_sonya.png",
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": true
+  },
+  {
+   "id": "friend_timur",
+   "name": "Тимур Валиев",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "ТВ",
+   "tags": [
+    "Знает все ответы, но молчит"
+   ],
+   "photo": "characters/friend_timur.png",
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": true
+  },
+  {
+   "id": "teacher_smirnov",
+   "name": "Доцент Смирнов",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "ДС",
+   "tags": [
+    "Кафедра матана",
+    "строгий"
+   ],
+   "photo": "characters/teacher_smirnov.png",
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": true
+  },
+  {
+   "id": "teacher_kovalev",
+   "name": "Профессор Ковалёв",
+   "kind": "teacher",
+   "bgPreset": 5,
+   "initials": "ПК",
+   "tags": [
+    "Лекции по 3 часа",
+    "спрашивает «а что это было?»"
+   ],
+   "photo": "characters/teacher_kovalev.png",
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": true
+  },
+  {
+   "id": "teacher_nigmatullina",
+   "name": "Ст. преп. Нигматуллина",
+   "kind": "teacher",
+   "bgPreset": 2,
+   "initials": "СН",
+   "tags": [
+    "Ведёт лабы",
+    "ставит зачёт по списку"
+   ],
+   "photo": "characters/teacher_nigmatullina.png",
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": true
+  },
+  {
+   "id": "teacher_akhmetov",
+   "name": "Ассистент Ахметов",
+   "kind": "teacher",
+   "bgPreset": 4,
+   "initials": "АА",
+   "tags": [
+    "Приходит в 8:00",
+    "не любит опоздавших"
+   ],
+   "photo": "characters/teacher_akhmetov.png",
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": true
+  }
+ ]
+}
