@@ -58,7 +58,8 @@ fun CharacterCard(
     scale: Float = 1f,
     roundLabel: String? = null,
     typeLabel: String? = null,
-    photoFraction: Float = 0.60f
+    photoFraction: Float = 0.60f,
+    showType: Boolean = true
 ) {
     val corner = (28 * scale).dp
     val shape = RoundedCornerShape(corner)
@@ -75,23 +76,29 @@ fun CharacterCard(
             modifier = Modifier.fillMaxSize().padding((18 * scale).dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = (typeLabel ?: kindLabel(card.kind)).uppercase(),
-                    color = Color.White.copy(alpha = 0.6f),
-                    fontSize = (12 * scale).sp,
-                    letterSpacing = 1.5.sp,
-                    fontWeight = FontWeight.Medium
-                )
-                if (roundLabel != null) {
-                    Text(
-                        text = roundLabel,
-                        color = Color.White.copy(alpha = 0.6f),
-                        fontSize = (12 * scale).sp
-                    )
+            if (showType || roundLabel != null) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    if (showType) {
+                        Text(
+                            text = (typeLabel ?: kindLabel(card.kind)).uppercase(),
+                            color = Color.White.copy(alpha = 0.6f),
+                            fontSize = (12 * scale).sp,
+                            letterSpacing = 1.5.sp,
+                            fontWeight = FontWeight.Medium
+                        )
+                    } else {
+                        Spacer(Modifier.width(1.dp))
+                    }
+                    if (roundLabel != null) {
+                        Text(
+                            text = roundLabel,
+                            color = Color.White.copy(alpha = 0.6f),
+                            fontSize = (12 * scale).sp
+                        )
+                    }
                 }
             }
             Spacer(Modifier.height((8 * scale).dp))

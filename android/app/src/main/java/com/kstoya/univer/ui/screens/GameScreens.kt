@@ -108,7 +108,8 @@ fun GameHost(vm: AppViewModel, onExit: () -> Unit) {
                 index = g.index + 1,
                 total = g.players.size,
                 onReady = { Haptics.tick(ctx, settings.vibrate); vm.ready() },
-                onExit = backExit
+                onExit = backExit,
+                onFinish = { vm.endGame() }
             )
         }
         g.phase == LocalPhase.COUNTDOWN -> {
@@ -201,7 +202,7 @@ fun KeepBright() {
 }
 
 @Composable
-private fun PassScreen(name: String, index: Int, total: Int, onReady: () -> Unit, onExit: () -> Unit) {
+private fun PassScreen(name: String, index: Int, total: Int, onReady: () -> Unit, onExit: () -> Unit, onFinish: () -> Unit) {
     Box(
         Modifier.fillMaxSize().background(
             Brush.verticalGradient(listOf(Color(0xFF1A1A21), Color(0xFF101014)))
@@ -233,7 +234,11 @@ private fun PassScreen(name: String, index: Int, total: Int, onReady: () -> Unit
             )
             Spacer(Modifier.weight(1f))
             BigButton(stringResource(R.string.pass_ready), onClick = onReady)
-            Spacer(Modifier.height(24.dp))
+            Spacer(Modifier.height(4.dp))
+            TextButton(onClick = onFinish) {
+                Text(stringResource(R.string.review_finish), color = Color.White.copy(alpha = 0.6f), fontSize = 14.sp)
+            }
+            Spacer(Modifier.height(16.dp))
         }
     }
 }
@@ -465,7 +470,8 @@ fun SummaryScreen(
                         card = ch?.toCardModel() ?: fallbackCard(r.characterName),
                         modifier = Modifier.fillMaxSize(),
                         scale = 0.22f,
-                        photoFraction = 0.8f
+                        photoFraction = 0.8f,
+                        showType = false
                     )
                 }
                 Column(Modifier.weight(1f).padding(start = 12.dp)) {

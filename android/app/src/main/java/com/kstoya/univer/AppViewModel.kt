@@ -240,6 +240,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 val d = e.countdownDigit(now)
                 if (d != lastDigit) {
                     lastDigit = d
+                    if (d in 1..3) sounds.play("tick", 0.8f, s)
                     if (d == 0) sounds.play("go", settings = s)
                 }
             }

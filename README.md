@@ -52,7 +52,7 @@ APK: `android/app/build/outputs/apk/debug/app-debug.apk` — подписан к
 ## Тесты
 
 ```bash
-cd android && ./gradlew :app:testDebugUnitTest      # 42 теста: Logic, Room/Robolectric, рендер Compose
+cd android && ./gradlew :app:testDebugUnitTest      # 43 теста: Logic, Room/Robolectric, рендер Compose
 cd server  && npm i && npm test                      # 10 тестов комнат
 py tools/check_strings.py                            # ключи ru == en
 ```
