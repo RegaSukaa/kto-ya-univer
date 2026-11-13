@@ -15,6 +15,8 @@ data class CharacterEntity(
     val bgPreset: Int = 0,
     val photoPath: String? = null,
     val assetPhoto: String? = null,
+    /** несколько фото из assets, разделитель \u0001 (случайный выбор на раунд) */
+    val assetPhotos: String? = null,
     val cropJson: String? = null,
     val initials: String = "",
     val createdAt: Long = 0L,
@@ -67,3 +69,9 @@ data class RoundEntity(
     val shownMs: Int,
     val markedAt: Long? = null
 )
+
+
+/** Все asset-фото персонажа: список или один основной. */
+fun CharacterEntity.assetPhotoPaths(): List<String> =
+    assetPhotos?.split('\u0001')?.filter { it.isNotBlank() }?.takeIf { it.isNotEmpty() }
+        ?: listOfNotNull(assetPhoto)

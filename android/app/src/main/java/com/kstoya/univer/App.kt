@@ -3,7 +3,6 @@ package com.kstoya.univer
 import android.app.Application
 import android.content.Context
 import com.kstoya.univer.audio.Sounds
-import com.kstoya.univer.audio.VoicePack
 import com.kstoya.univer.data.AppDb
 import com.kstoya.univer.data.Prefs
 import com.kstoya.univer.data.Repo
@@ -20,8 +19,6 @@ class App : Application() {
         private set
     lateinit var sounds: Sounds
         private set
-    lateinit var voicePack: VoicePack
-        private set
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     override fun attachBaseContext(base: Context) {
@@ -33,7 +30,6 @@ class App : Application() {
         prefs = Prefs(this)
         repo = Repo(this, AppDb.get(this), prefs)
         sounds = Sounds(this)
-        voicePack = VoicePack(this)
         // В Robolectric база и assets живут недолго: фоновое наполнение ломает SQLite-песочницу.
         if (!android.os.Build.FINGERPRINT.contains("robolectric")) {
             scope.launch { runCatching { repo.seedFromAssets() } }

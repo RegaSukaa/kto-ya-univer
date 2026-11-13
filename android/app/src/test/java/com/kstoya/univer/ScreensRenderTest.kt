@@ -61,7 +61,7 @@ class ScreensRenderTest {
                     presetNames = { emptyList() },
                     onBack = {},
                     onSavePreset = { _, _ -> },
-                    onStart = { _, _, _, _ -> },
+                    onStart = { _, _, _, _, _ -> },
                     onAddCharacters = {}
                 )
             }
@@ -106,7 +106,6 @@ class ScreensRenderTest {
                 ReviewScreen(
                     rounds = rounds,
                     results = results,
-                    chars = chars(6).associateBy { it.id },
                     onReshow = {}, onSetResult = { _, _ -> }, onNextRound = {}, onOpenSummary = {}, onExit = {}
                 )
             }
@@ -114,6 +113,7 @@ class ScreensRenderTest {
         (0 until 6).forEach { compose.onNodeWithText("Игрок $it").assertExists() }
         compose.onNodeWithText("✓ " + ctx.getString(R.string.review_status_guessed)).assertExists()
         compose.onNodeWithText(ctx.getString(R.string.review_finish)).assertExists()
+        compose.onNodeWithText(ctx.getString(R.string.review_show_character, "Игрок 0")).assertExists()
     }
 
     @Test
@@ -128,7 +128,7 @@ class ScreensRenderTest {
                     results = results,
                     stats = SummaryStats(4, 6, listOf("Игрок 0"), 3, 3, 1, 3, 10),
                     scored = true,
-                    chars = chars(6).associateBy { it.id },
+                    onShowCharacter = {},
                     onNextRound = {}, onExit = {}
                 )
             }

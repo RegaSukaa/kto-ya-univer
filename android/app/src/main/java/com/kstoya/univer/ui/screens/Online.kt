@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -52,6 +53,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.kstoya.univer.OnlineUiState
+import com.kstoya.univer.RevealCard
 import com.kstoya.univer.OnlineViewModel
 import com.kstoya.univer.R
 import com.kstoya.univer.data.CharacterEntity
@@ -111,7 +113,7 @@ fun OnlineScreen(
             onDismissSaved = { vm.dismissSaved() }
         )
         s.phase == "closed" -> OnlineEnded(s, onBack, vm, server, name)
-        s.displayPhase == "lobby" -> OnlineLobby(s, vm, onBack)
+        s.displayPhase == "lobby" -> OnlineLobby(s, vm, onBack, settings)
         s.displayPhase == "countdown" -> {
             KeepBright()
             Box(Modifier.fillMaxSize().background(Color(0xFF2B2109))) {
@@ -125,7 +127,7 @@ fun OnlineScreen(
         }
         s.displayPhase == "show" || s.displayPhase == "mark" -> OnlineGame(s, vm)
         s.phase == "reveal" -> OnlineReveal(s, vm, onBack)
-        else -> OnlineLobby(s, vm, onBack)
+        else -> OnlineLobby(s, vm, onBack, settings)
     }
 
     BackHandler {
@@ -245,7 +247,7 @@ private fun OnlineEntry(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun OnlineLobby(state: OnlineUiState, vm: OnlineViewModel, onBack: () -> Unit) {
+private fun OnlineLobby(state: OnlineUiState, vm: OnlineViewModel, onBack: () -> Unit, settings: Settings) {
     val ctx = LocalContext.current
     val clipboard = LocalClipboardManager.current
     val me = state.players.firstOrNull { it.id == state.myId }
@@ -305,7 +307,7 @@ private fun OnlineLobby(state: OnlineUiState, vm: OnlineViewModel, onBack: () ->
             Spacer(Modifier.weight(1f))
             if (state.host) {
                 val canStart = state.players.size >= 2 && state.players.all { it.ready }
-                BigButton(stringResource(R.string.online_start), onClick = { vm.startGame() }, enabled = canStart)
+                BigButton(stringResource(R.string.online_start), onClick = { vm.startGame(settings.deckFilter) }, enabled = canStart)
                 if (state.players.size < 2) {
                     Text(stringResource(R.string.online_waiting_players), fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
@@ -326,7 +328,7 @@ private fun OnlineLobby(state: OnlineUiState, vm: OnlineViewModel, onBack: () ->
 @Composable
 private fun OnlineGame(state: OnlineUiState, vm: OnlineViewModel) {
     KeepBright()
-    val card = state.myCharacter?.toCardModel()
+    val card = state.myCharacter?.toCardModel(state.myPhotoIndex)
     val remaining = state.showRemainingMs
     val seconds = ceil(remaining / 1000.0).toInt()
     Box(Modifier.fillMaxSize().background(Color.Black).systemBarsPadding()) {
@@ -388,24 +390,56 @@ private fun OnlineGame(state: OnlineUiState, vm: OnlineViewModel) {
 
 @Composable
 private fun OnlineReveal(state: OnlineUiState, vm: OnlineViewModel, onBack: () -> Unit) {
-    Column(
-        Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).systemBarsPadding()
-            .verticalScroll(rememberScrollState()).padding(20.dp)
-    ) {
-        Text(stringResource(R.string.online_reveal), fontSize = 30.sp, fontWeight = FontWeight.Bold)
-        Spacer(Modifier.height(12.dp))
-        state.reveal.forEach { (player, character) ->
-            Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-                Text(player, fontSize = 17.sp, fontWeight = FontWeight.Medium, modifier = Modifier.weight(1f))
-                Text(character, fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    var openCard by remember { mutableStateOf<RevealCard?>(null) }
+    Box(Modifier.fillMaxSize()) {
+        Column(
+            Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).systemBarsPadding()
+                .verticalScroll(rememberScrollState()).padding(20.dp)
+        ) {
+            Text(stringResource(R.string.online_reveal), fontSize = 30.sp, fontWeight = FontWeight.Bold)
+            Spacer(Modifier.height(4.dp))
+            Text(stringResource(R.string.review_hidden_hint), fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Spacer(Modifier.height(12.dp))
+            state.revealCards.forEach { row ->
+                Column(Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
+                    Text(row.playerName, fontSize = 17.sp, fontWeight = FontWeight.Medium)
+                    TextButton(
+                        onClick = { openCard = row },
+                        contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+                    ) {
+                        Text(
+                            stringResource(R.string.review_show_character, row.playerName),
+                            fontSize = 13.sp,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
+            }
+            Spacer(Modifier.height(24.dp))
+            if (state.host) {
+                BigButton(stringResource(R.string.review_next_round), onClick = { vm.nextRound() })
+                Spacer(Modifier.height(8.dp))
+            }
+            BigButton(stringResource(R.string.summary_menu), onClick = { vm.leave(); onBack() }, primary = false)
+        }
+        openCard?.let { rc ->
+            Box(Modifier.fillMaxSize().background(Color.Black).systemBarsPadding()) {
+                val card = rc.character?.toCardModel(rc.photoIndex)
+                if (card != null) {
+                    CharacterCard(
+                        card = card,
+                        modifier = Modifier.fillMaxSize().padding(20.dp).clickable { openCard = null },
+                        roundLabel = rc.playerName
+                    )
+                }
+                IconButton(
+                    onClick = { openCard = null },
+                    modifier = Modifier.align(Alignment.TopStart).padding(8.dp)
+                ) {
+                    Icon(Icons.Filled.Close, contentDescription = stringResource(R.string.review_close), tint = Color.White)
+                }
             }
         }
-        Spacer(Modifier.height(24.dp))
-        if (state.host) {
-            BigButton(stringResource(R.string.review_next_round), onClick = { vm.nextRound() })
-            Spacer(Modifier.height(8.dp))
-        }
-        BigButton(stringResource(R.string.summary_menu), onClick = { vm.leave(); onBack() }, primary = false)
     }
 }
 

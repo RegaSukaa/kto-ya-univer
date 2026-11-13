@@ -79,7 +79,7 @@ wss.on("connection", (ws) => {
           break;
         }
         case "start": {
-          const room = store.start(ws.roomCode, ws.playerId, { showMs: msg.showMs, alternateKinds: msg.alternateKinds });
+          const room = store.start(ws.roomCode, ws.playerId, { showMs: msg.showMs, alternateKinds: msg.alternateKinds, filter: msg.filter });
           broadcast(room);
           for (const p of room.players) send(sockets.get(p.id), store.countdownPayload(room));
           break;

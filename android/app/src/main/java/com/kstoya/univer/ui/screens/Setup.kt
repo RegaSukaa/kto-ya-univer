@@ -48,6 +48,7 @@ import com.kstoya.univer.R
 import com.kstoya.univer.data.CharacterEntity
 import com.kstoya.univer.data.PresetEntity
 import com.kstoya.univer.data.Settings
+import com.kstoya.univer.game.DeckFilter
 import com.kstoya.univer.ui.components.BigButton
 import com.kstoya.univer.ui.components.CardSurface
 import com.kstoya.univer.ui.components.ChipRow
@@ -63,7 +64,7 @@ fun SetupScreen(
     presetNames: (PresetEntity) -> List<String>,
     onBack: () -> Unit,
     onSavePreset: (String, List<String>) -> Unit,
-    onStart: (List<String>, Int, Boolean, Boolean) -> Unit,
+    onStart: (List<String>, Int, Boolean, Boolean, String) -> Unit,
     onAddCharacters: () -> Unit
 ) {
     var count by rememberSaveable { mutableStateOf(6) }
@@ -71,15 +72,17 @@ fun SetupScreen(
     var showMs by rememberSaveable { mutableStateOf(settings.showMs) }
     var alternate by rememberSaveable { mutableStateOf(settings.alternateKinds) }
     var markAfter by rememberSaveable { mutableStateOf(settings.markAfter) }
+    var filter by rememberSaveable { mutableStateOf(settings.deckFilter) }
     var presetTitle by remember { mutableStateOf("") }
     var showSaveDialog by remember { mutableStateOf(false) }
     val defaultPresetTitle = stringResource(R.string.setup_title)
 
     val filledNames = (0 until count).map { names[it].trim() }
     val filledCount = filledNames.count { it.isNotEmpty() }
-    val canStart = filledCount >= 2 && characters.size >= 2
-    val friendCount = characters.count { it.kind == "friend" }
-    val teacherCount = characters.count { it.kind == "teacher" }
+    val deckChars = DeckFilter.apply(characters, filter) { it.kind }
+    val canStart = filledCount >= 2 && deckChars.size >= 2
+    val friendCount = deckChars.count { it.kind == "friend" }
+    val teacherCount = deckChars.count { it.kind == "teacher" }
     val latest = presets.firstOrNull()
 
     Scaffold(
@@ -145,12 +148,31 @@ fun SetupScreen(
             Spacer(Modifier.height(24.dp))
             SectionTitle(stringResource(R.string.setup_deck))
             Spacer(Modifier.height(8.dp))
+            ChipRow(
+                listOf(
+                    stringResource(R.string.filter_all),
+                    stringResource(R.string.filter_students),
+                    stringResource(R.string.filter_teachers)
+                ),
+                when (filter) {
+                    DeckFilter.FRIENDS -> 1
+                    DeckFilter.TEACHERS -> 2
+                    else -> 0
+                }
+            ) { i ->
+                filter = when (i) {
+                    1 -> DeckFilter.FRIENDS
+                    2 -> DeckFilter.TEACHERS
+                    else -> DeckFilter.ALL
+                }
+            }
+            Spacer(Modifier.height(8.dp))
             Text(
-                stringResource(R.string.setup_deck, characters.size) + " · " +
+                stringResource(R.string.setup_deck, deckChars.size) + " · " +
                     stringResource(R.string.setup_deck_kinds, friendCount, teacherCount),
                 fontSize = 15.sp
             )
-            if (characters.size < count) {
+            if (deckChars.size < count) {
                 Text(
                     stringResource(R.string.setup_deck_warn),
                     color = MaterialTheme.colorScheme.primary,
@@ -158,7 +180,7 @@ fun SetupScreen(
                     modifier = Modifier.padding(top = 6.dp)
                 )
             }
-            if (characters.size < 2) {
+            if (deckChars.size < 2) {
                 Text(stringResource(R.string.setup_need_characters), color = MaterialTheme.colorScheme.error, fontSize = 14.sp)
                 TextButton(onClick = onAddCharacters) { Text(stringResource(R.string.onboarding_add_chars)) }
             }
@@ -193,7 +215,7 @@ fun SetupScreen(
             }
             BigButton(
                 text = stringResource(R.string.setup_start),
-                onClick = { onStart(filledNames, showMs, alternate, markAfter) },
+                onClick = { onStart(filledNames, showMs, alternate, markAfter, filter) },
                 enabled = canStart
             )
             Spacer(Modifier.height(32.dp))

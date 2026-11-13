@@ -112,7 +112,7 @@ class ScreenshotTest {
         compose.setContent {
             KtoYaTheme(dark = true) {
                 ReviewScreen(
-                    rounds = rounds, results = results, chars = chars,
+                    rounds = rounds, results = results,
                     onReshow = {}, onSetResult = { _, _ -> }, onNextRound = {}, onOpenSummary = {}, onExit = {}
                 )
             }
@@ -138,7 +138,7 @@ class ScreenshotTest {
                     results = mapOf("p0" to "guessed", "p1" to "missed", "p2" to "guessed", "p3" to "guessed", "p4" to "missed", "p5" to "guessed"),
                     stats = SummaryStats(4, 6, listOf("Тимур"), 3, 4, 1, 2, 10),
                     scored = true,
-                    chars = chars,
+                    onShowCharacter = {},
                     onNextRound = {}, onExit = {}
                 )
             }

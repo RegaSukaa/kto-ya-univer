@@ -57,6 +57,7 @@ export class RoomStore {
       showMs: 10000,
       startAt: 0,
       results: {},
+      filter: "all",
       createdAt: this.now(),
       lastActivity: this.now()
     };
@@ -105,7 +106,7 @@ export class RoomStore {
     return room;
   }
 
-  start(code, playerId, { showMs = 10000, alternateKinds = true } = {}) {
+  start(code, playerId, { showMs = 10000, alternateKinds = true, filter = "all" } = {}) {
     const room = this.get(code);
     if (room.hostId !== playerId) throw new RoomError("NOT_HOST");
     if (room.phase !== "lobby") throw new RoomError("ALREADY_STARTED");
@@ -114,6 +115,7 @@ export class RoomStore {
     room.round = 1;
     room.showMs = Math.max(1000, Math.min(60000, Number(showMs) || 10000));
     room.alternateKinds = !!alternateKinds;
+    room.filter = ["all", "friends", "teachers"].includes(filter) ? filter : "all";
     room.seed = Math.floor(Math.random() * 2 ** 48);
     room.startAt = this.now() + 1500;
     room.results = {};
@@ -215,6 +217,7 @@ export class RoomStore {
       deckSize: room.deckSize,
       deckHash: room.deckHash,
       seed: room.seed,
+      filter: room.filter,
       showMs: room.showMs,
       startAt: room.startAt,
       results: room.results

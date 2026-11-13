@@ -8,7 +8,9 @@ data class RoundInfo(
     val playerId: String,
     val playerName: String,
     val characterId: String,
-    val characterName: String
+    val characterName: String,
+    /** какое из фото персонажа показываем в этом раунде */
+    val photoIndex: Int = 0
 )
 
 const val COUNT_STEP_MS = 800L

@@ -110,3 +110,11 @@ test("host leaves lobby -> host transfers; playing -> room closes after grace", 
   store.sweep();
   assert.equal(store.rooms.size, 0);
 });
+
+test("deck filter is stored and broadcast", () => {
+  const { store } = storeAt(0);
+  const { room, player: host } = store.create({ name: "host" });
+  store.join(room.code, "guest");
+  store.start(room.code, host.id, { filter: "teachers" });
+  assert.equal(store.snapshot(room).filter, "teachers");
+});

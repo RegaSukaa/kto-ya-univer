@@ -1,12 +1,12 @@
 package com.kstoya.univer.audio
 
-enum class SoundSource { PERSONAL, VOICE_PACK, ASSET }
+enum class SoundSource { PERSONAL, BANK, ASSET }
 
-/** Порядок выбора звука: личная реплика → голосовой пак → встроенный wav. Тишины нет ни в одном случае. */
+/** Порядок выбора: личная реплика → случайный голос из банка → встроенный WAV. Тишины нет. */
 object SoundPriority {
-    fun resolve(personalExists: Boolean, voicePackExists: Boolean): SoundSource = when {
+    fun resolve(personalExists: Boolean, bankExists: Boolean): SoundSource = when {
         personalExists -> SoundSource.PERSONAL
-        voicePackExists -> SoundSource.VOICE_PACK
+        bankExists -> SoundSource.BANK
         else -> SoundSource.ASSET
     }
 }

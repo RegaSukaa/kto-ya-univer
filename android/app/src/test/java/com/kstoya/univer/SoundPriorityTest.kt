@@ -13,8 +13,8 @@ class SoundPriorityTest {
     }
 
     @Test
-    fun `voice pack is second`() {
-        assertEquals(SoundSource.VOICE_PACK, SoundPriority.resolve(false, true))
+    fun `voice bank is second`() {
+        assertEquals(SoundSource.BANK, SoundPriority.resolve(false, true))
     }
 
     @Test

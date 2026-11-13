@@ -20,7 +20,6 @@ import com.kstoya.univer.ui.screens.OnlineScreen
 import com.kstoya.univer.ui.screens.PlaceholderScreen
 import com.kstoya.univer.ui.screens.SettingsScreen
 import com.kstoya.univer.ui.screens.SetupScreen
-import com.kstoya.univer.ui.screens.VoicePackScreen
 
 private const val UI_PREFS = "ktya_ui"
 const val KEY_ONBOARDED = "onboarded"
@@ -42,10 +41,6 @@ fun AppNav(vm: AppViewModel) {
                     markOnboarded(ctx)
                     if (goLibrary) nav.navigate("library") { popUpTo("onboarding") { inclusive = true } }
                     else nav.navigate("home") { popUpTo("onboarding") { inclusive = true } }
-                },
-                onRecord = {
-                    markOnboarded(ctx)
-                    nav.navigate("voice") { popUpTo("onboarding") { inclusive = true } }
                 }
             )
         }
@@ -70,9 +65,9 @@ fun AppNav(vm: AppViewModel) {
                 presetNames = { vm.presetNameList(it) },
                 onBack = { nav.popBackStack() },
                 onSavePreset = { title, names -> vm.savePreset(title, names) },
-                onStart = { names, showMs, alt, mark ->
+                onStart = { names, showMs, alt, mark, filter ->
                     vm.playClick()
-                    if (vm.startLocal(names, showMs, alt, mark)) {
+                    if (vm.startLocal(names, showMs, alt, mark, filter)) {
                         nav.navigate("game") { popUpTo("home") }
                     }
                 },
@@ -128,7 +123,7 @@ fun AppNav(vm: AppViewModel) {
                     vm.setLanguage(tag)
                     ctx.findActivity()?.recreate()
                 },
-                onVoice = { nav.navigate("voice") },
+                onDeckFilter = { vm.setDeckFilter(it) },
                 onPlaceholders = { nav.navigate("placeholders") },
                 onAbout = { nav.navigate("about") },
                 onWipe = { done -> vm.wipeData { done() } },
@@ -138,15 +133,10 @@ fun AppNav(vm: AppViewModel) {
                 onApplyImport = { preview, policy, done -> vm.applyImport(preview, policy, done) }
             )
         }
-        composable("voice") {
-            val settings by vm.settings.collectAsState()
-            VoicePackScreen(voicePack = vm.voicePack, settings = settings, onBack = { nav.popBackStack() })
-        }
         composable("placeholders") {
             val chars by vm.characters.collectAsState()
             PlaceholderScreen(
                 characters = chars,
-                recordedVoices = vm.voicePack.recordedCount(),
                 onBack = { nav.popBackStack() },
                 onRefresh = { cb -> vm.refreshBank(cb) }
             )

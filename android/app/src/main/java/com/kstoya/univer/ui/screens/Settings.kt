@@ -41,6 +41,7 @@ import com.kstoya.univer.R
 import com.kstoya.univer.data.ImportPolicy
 import com.kstoya.univer.data.ImportPreview
 import com.kstoya.univer.data.Settings
+import com.kstoya.univer.game.DeckFilter
 import com.kstoya.univer.ui.components.BigButton
 import com.kstoya.univer.ui.components.CardSurface
 import com.kstoya.univer.ui.components.ChipRow
@@ -65,7 +66,7 @@ fun SettingsScreen(
     onVoiceVolume: (Float) -> Unit,
     onDarkTheme: (Boolean) -> Unit,
     onLanguage: (String) -> Unit,
-    onVoice: () -> Unit,
+    onDeckFilter: (String) -> Unit,
     onPlaceholders: () -> Unit,
     onAbout: () -> Unit,
     onWipe: ((() -> Unit) -> Unit),
@@ -125,6 +126,29 @@ fun SettingsScreen(
                     ToggleRow(stringResource(R.string.settings_mark_after), settings.markAfter, onMarkAfter)
                     ToggleRow(stringResource(R.string.settings_tap_hide), settings.tapHide, onTapHide)
                     ToggleRow(stringResource(R.string.app_name) + " — " + stringResource(R.string.settings_theme), settings.darkTheme, onDarkTheme)
+                    Spacer(Modifier.height(10.dp))
+                    Text(stringResource(R.string.setup_deck_choose), fontSize = 16.sp)
+                    Spacer(Modifier.height(6.dp))
+                    ChipRow(
+                        listOf(
+                            stringResource(R.string.filter_all),
+                            stringResource(R.string.filter_students),
+                            stringResource(R.string.filter_teachers)
+                        ),
+                        when (settings.deckFilter) {
+                            DeckFilter.FRIENDS -> 1
+                            DeckFilter.TEACHERS -> 2
+                            else -> 0
+                        }
+                    ) { i ->
+                        onDeckFilter(
+                            when (i) {
+                                1 -> DeckFilter.FRIENDS
+                                2 -> DeckFilter.TEACHERS
+                                else -> DeckFilter.ALL
+                            }
+                        )
+                    }
                 }
             }
 
@@ -137,7 +161,6 @@ fun SettingsScreen(
                     ToggleRow(stringResource(R.string.settings_vibrate), settings.vibrate, onVibrate)
                     Text(stringResource(R.string.settings_voice_volume), fontSize = 16.sp)
                     Slider(value = settings.voiceVolume, onValueChange = onVoiceVolume, valueRange = 0f..1f)
-                    TextButton(onClick = onVoice) { Text(stringResource(R.string.settings_voice)) }
                 }
             }
 

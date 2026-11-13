@@ -96,7 +96,7 @@ fun GameHost(vm: AppViewModel, onExit: () -> Unit) {
             results = g.results,
             stats = g.summary!!,
             scored = g.markAfter,
-            chars = vm.characters.collectAsState().value.associateBy { it.id },
+            onShowCharacter = { vm.reshow(it) },
             onNextRound = { vm.nextRound() },
             onExit = backExit
         )
@@ -153,7 +153,6 @@ fun GameHost(vm: AppViewModel, onExit: () -> Unit) {
             ReviewScreen(
                 rounds = g.rounds,
                 results = g.results,
-                chars = vm.characters.collectAsState().value.associateBy { it.id },
                 onReshow = { vm.reshow(it) },
                 onSetResult = { id, v -> vm.setReviewResult(id, v) },
                 onNextRound = { vm.nextRound() },
@@ -323,7 +322,6 @@ private fun ReshowScreen(vm: AppViewModel, round: RoundInfo, card: com.kstoya.un
 fun ReviewScreen(
     rounds: List<RoundInfo>,
     results: Map<String, String?>,
-    chars: Map<String, com.kstoya.univer.data.CharacterEntity>,
     onReshow: (RoundInfo) -> Unit,
     onSetResult: (String, String) -> Unit,
     onNextRound: () -> Unit,
@@ -339,7 +337,7 @@ fun ReviewScreen(
                 }
                 Text(stringResource(R.string.review_title), fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onBackground)
             }
-            Text(stringResource(R.string.review_subtitle), fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(stringResource(R.string.review_hidden_hint), fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
@@ -349,7 +347,6 @@ fun ReviewScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(rounds, key = { it.playerId }) { r ->
-                val ch = chars[r.characterId]
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
                         r.playerName,
@@ -357,15 +354,37 @@ fun ReviewScreen(
                         maxLines = 1, color = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.padding(bottom = 6.dp)
                     )
-                    CharacterCard(
-                        card = ch?.toCardModel() ?: fallbackCard(r.characterName),
-                        modifier = Modifier.fillMaxWidth().aspectRatio(0.75f).clip(RoundedCornerShape(14.dp))
+                    // Карточка закрыта: персонаж не виден, пока не нажмёшь.
+                    Box(
+                        modifier = Modifier.fillMaxWidth().aspectRatio(0.75f)
+                            .clip(RoundedCornerShape(14.dp))
+                            .background(
+                                androidx.compose.ui.graphics.Brush.linearGradient(
+                                    listOf(Color(0xFF26262F), Color(0xFF15151B))
+                                )
+                            )
                             .combinedClickable(
                                 onClick = { onReshow(r) },
                                 onLongClick = { changeFor = r }
                             ),
-                        scale = 0.5f
-                    )
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier.padding(12.dp)
+                        ) {
+                            Text("?", fontSize = 40.sp, color = Color.White.copy(alpha = 0.35f), fontWeight = FontWeight.Bold)
+                            Spacer(Modifier.height(6.dp))
+                            Text(
+                                text = stringResource(R.string.review_show_character, r.playerName),
+                                fontSize = 13.sp,
+                                lineHeight = 17.sp,
+                                color = Color.White.copy(alpha = 0.8f),
+                                textAlign = TextAlign.Center,
+                                maxLines = 3
+                            )
+                        }
+                    }
                     Text(
                         text = statusText(results[r.playerId]),
                         fontSize = 13.sp,
@@ -432,7 +451,7 @@ fun SummaryScreen(
     results: Map<String, String?>,
     stats: com.kstoya.univer.game.SummaryStats,
     scored: Boolean,
-    chars: Map<String, com.kstoya.univer.data.CharacterEntity>,
+    onShowCharacter: (RoundInfo) -> Unit,
     onNextRound: () -> Unit,
     onExit: () -> Unit
 ) {
@@ -464,19 +483,18 @@ fun SummaryScreen(
                 Modifier.fillMaxWidth().padding(vertical = 8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                val ch = chars[r.characterId]
-                Box(Modifier.size(52.dp).clip(RoundedCornerShape(10.dp))) {
-                    CharacterCard(
-                        card = ch?.toCardModel() ?: fallbackCard(r.characterName),
-                        modifier = Modifier.fillMaxSize(),
-                        scale = 0.22f,
-                        photoFraction = 0.8f,
-                        showType = false
-                    )
-                }
-                Column(Modifier.weight(1f).padding(start = 12.dp)) {
+                Column(Modifier.weight(1f)) {
                     Text(r.playerName, fontSize = 17.sp, fontWeight = FontWeight.SemiBold)
-                    Text(r.characterName, fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    TextButton(
+                        onClick = { onShowCharacter(r) },
+                        contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+                    ) {
+                        Text(
+                            stringResource(R.string.summary_show_character, r.playerName),
+                            fontSize = 13.sp,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
                 }
                 Text(statusText(results[r.playerId]), fontSize = 13.sp, color = statusColor(results[r.playerId]))
             }

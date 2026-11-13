@@ -5,6 +5,7 @@ import android.os.SystemClock
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.kstoya.univer.data.CharacterEntity
+import com.kstoya.univer.data.assetPhotoPaths
 import com.kstoya.univer.data.ImportPolicy
 import com.kstoya.univer.data.PresetEntity
 import com.kstoya.univer.data.Settings
@@ -13,6 +14,7 @@ import com.kstoya.univer.audio.SoundPriority
 import com.kstoya.univer.audio.SoundSource
 import com.kstoya.univer.game.COUNTDOWN_MS
 import com.kstoya.univer.game.Deck
+import com.kstoya.univer.game.DeckFilter
 import com.kstoya.univer.game.LocalGameEngine
 import com.kstoya.univer.game.LocalPhase
 import com.kstoya.univer.game.PlayerSlot
@@ -59,7 +61,6 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     private val repo = a.repo
     private val prefs = a.prefs
     private val sounds = a.sounds
-    val voicePack = a.voicePack
 
     val characters: StateFlow<List<CharacterEntity>> =
         repo.chars.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
@@ -101,6 +102,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     fun setVoiceVolume(v: Float) = viewModelScope.launch { prefs.setVoiceVolume(v) }
     fun setServerUrl(v: String) = viewModelScope.launch { prefs.setServerUrl(v) }
     fun setDarkTheme(v: Boolean) = viewModelScope.launch { prefs.setDarkTheme(v) }
+    fun setDeckFilter(v: String) = viewModelScope.launch { prefs.setDeckFilter(v) }
 
     fun language(): String = Lang.tag(getApplication())
     fun setLanguage(tag: String) {
@@ -164,9 +166,10 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     // ---------- локальная игра ----------
 
-    fun startLocal(names: List<String>, showMs: Int, alternate: Boolean, markAfter: Boolean): Boolean {
+    fun startLocal(names: List<String>, showMs: Int, alternate: Boolean, markAfter: Boolean, filter: String = DeckFilter.ALL): Boolean {
         val clean = names.map { it.trim() }.filter { it.isNotEmpty() }
-        val chars = characters.value
+        val allChars = characters.value
+        val chars = DeckFilter.apply(allChars, filter) { it.kind }
         if (clean.size < 2 || chars.size < 2) return false
         gameChars = chars
         val kinds = chars.associate { it.id to it.kind }
@@ -176,7 +179,12 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         val rounds = clean.mapIndexed { i, playerName ->
             val charId = deal["p$i"] ?: chars[i % chars.size].id
             val ch = chars.first { it.id == charId }
-            RoundInfo(playerId = "p$i", playerName = playerName, characterId = ch.id, characterName = ch.name)
+            val photos = maxOf(1, if (ch.photoPath != null) 1 else ch.assetPhotoPaths().size)
+            val photoIndex = java.util.Random(seed + i).nextInt(photos)
+            RoundInfo(
+                playerId = "p$i", playerName = playerName, characterId = ch.id,
+                characterName = ch.name, photoIndex = photoIndex
+            )
         }
         engine = LocalGameEngine(
             players = rounds.map { PlayerSlot(it.playerId, it.playerName) },
@@ -278,7 +286,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             index = e.index,
             players = e.players.map { it.name },
             rounds = e.rounds,
-            card = chars[current.characterId]?.toCardModel(),
+            card = chars[current.characterId]?.toCardModel(current.photoIndex),
             remainingMs = e.remaining(now),
             digit = e.countdownDigit(now),
             showMs = e.showMs,
@@ -300,7 +308,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         val now = SystemClock.elapsedRealtime()
         e.ready(now)
         lastPhase = e.phase
-        sounds.playVoice(e.current.characterId, "start", settings.value)
+        sounds.playVoice(e.current.characterId, "go", settings.value)
         Haptics.start(getApplication(), settings.value.vibrate)
         emit(now)
     }
@@ -320,10 +328,10 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         e.mark(now, value)
         val s = settings.value
         if (value == "guessed") {
-            sounds.playVoice(card?.id, "win", s)
+            sounds.playVoice(card?.id, "guessed", s)
             Haptics.success(getApplication(), s.vibrate)
         } else {
-            sounds.playVoice(card?.id, "skip", s)
+            sounds.playVoice(card?.id, "missed", s)
             Haptics.fail(getApplication(), s.vibrate)
         }
         viewModelScope.launch { if (sessionId.isNotEmpty()) repo.setResult(sessionId, playerId, value) }
@@ -394,7 +402,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     fun presetNameList(p: PresetEntity): List<String> = repo.presetNames(p)
 
     fun soundSourceFor(characterId: String, slot: String): SoundSource =
-        SoundPriority.resolve(sounds.hasPersonal(characterId, slot), voicePack.has(slot))
+        SoundPriority.resolve(sounds.hasPersonal(characterId, "win"), sounds.hasBank(slot))
 
     fun loadPhoto(uri: android.net.Uri, onLoaded: (android.graphics.Bitmap?) -> Unit) = viewModelScope.launch {
         onLoaded(com.kstoya.univer.media.PhotoImporter.loadBitmap(getApplication(), uri))

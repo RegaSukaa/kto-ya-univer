@@ -5,16 +5,17 @@ import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.SoundPool
-import android.os.Build
-import android.util.Log
 import com.kstoya.univer.data.Settings
-import java.io.File
 
 /**
- * Короткие сэмплы — SoundPool (задержка < 50 мс), реплики — MediaPlayer.
- * Пустой/битый файл не роняет воспроизведение: играет следующий в цепочке.
+ * Голоса — заранее записанные файлы из assets/voices/<slot>/, выбираются случайно.
+ * Если банк пуст — встроенный WAV. Тишины нет ни в одном случае.
  */
 class Sounds(private val ctx: Context) {
+    companion object {
+        val VOICE_SLOTS = listOf("go", "guessed", "missed", "final")
+    }
+
     private val pool: SoundPool = SoundPool.Builder()
         .setMaxStreams(4)
         .setAudioAttributes(
@@ -26,6 +27,17 @@ class Sounds(private val ctx: Context) {
 
     private val ids = mutableMapOf<String, Int>()
     private var player: MediaPlayer? = null
+    private val bank: Map<String, List<String>> by lazy {
+        VOICE_SLOTS.associateWith { slot ->
+            runCatching {
+                ctx.assets.list("voices/$slot")
+                    ?.filter { it.endsWith(".m4a", true) || it.endsWith(".wav", true) }
+                    ?.sorted()
+                    ?: emptyList()
+            }.getOrDefault(emptyList())
+        }
+    }
+    private val lastVoice = mutableMapOf<String, String>()
     private val assetSounds: Set<String> by lazy {
         runCatching { ctx.assets.list("sounds")?.toSet() ?: emptySet() }.getOrDefault(emptySet())
     }
@@ -46,26 +58,38 @@ class Sounds(private val ctx: Context) {
     fun hasPersonal(characterId: String, slot: String): Boolean =
         assetSounds.contains("${characterId}_$slot.m4a")
 
-    fun voicePackFile(slot: String): File = File(File(ctx.filesDir, "voice"), "$slot.m4a")
+    fun hasBank(slot: String): Boolean = bank[slot]?.isNotEmpty() == true
+
+    /** Случайная реплика из банка, с защитой от повтора подряд. */
+    fun playBank(slot: String, volume: Float): Boolean {
+        val files = bank[slot] ?: return false
+        if (files.isEmpty()) return false
+        val candidates = if (files.size > 1) files.filter { it != lastVoice[slot] } else files
+        val pick = candidates.random()
+        lastVoice[slot] = pick
+        return playAsset("voices/$slot/$pick", volume)
+    }
 
     /**
-     * Реплика: assets/<id>_<slot>.m4a → filesDir/voice/<slot>.m4a → assets/sounds/<slot>.wav.
-     * slot: win | skip | start | final
+     * Реплика: личный голос персонажа (assets/sounds/<id>_win.m4a) →
+     * случайный голос из банка (assets/voices/<slot>/) → встроенный WAV.
      */
     fun playVoice(characterId: String?, slot: String, settings: Settings) {
         if (!settings.sound || streamVolume() <= 0) return
-        val personal = characterId?.let { "sounds/${it}_$slot.m4a" }
-        if (personal != null && assetSounds.contains("${characterId}_$slot.m4a")) {
-            if (playAssetMp3(personal, settings.voiceVolume)) return
+        val personal = when (slot) {
+            "guessed" -> "win"
+            "missed" -> "skip"
+            else -> null
         }
-        val recorded = voicePackFile(slot)
-        if (recorded.exists() && recorded.length() > 0) {
-            if (playFile(recorded, settings.voiceVolume)) return
+        if (characterId != null && personal != null) {
+            val name = "${characterId}_$personal.m4a"
+            if (assetSounds.contains(name) && playAsset("sounds/$name", settings.voiceVolume)) return
         }
+        if (playBank(slot, settings.voiceVolume)) return
         val fallback = when (slot) {
-            "win" -> "win"
-            "skip" -> "skip"
-            "start" -> "go"
+            "go" -> "go"
+            "guessed" -> "win"
+            "missed" -> "skip"
             "final" -> "fanfare"
             else -> "win"
         }
@@ -77,7 +101,7 @@ class Sounds(private val ctx: Context) {
         am.getStreamVolume(AudioManager.STREAM_MUSIC)
     }.getOrDefault(1)
 
-    private fun playAssetMp3(path: String, volume: Float): Boolean = runCatching {
+    private fun playAsset(path: String, volume: Float): Boolean = runCatching {
         releasePlayer()
         val afd = ctx.assets.openFd(path)
         player = MediaPlayer().apply {
@@ -86,21 +110,6 @@ class Sounds(private val ctx: Context) {
                     .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build()
             )
             setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
-            setVolume(volume, volume)
-            prepare()
-            start()
-        }
-        true
-    }.getOrElse { false }
-
-    fun playFile(file: File, volume: Float = 1f): Boolean = runCatching {
-        releasePlayer()
-        player = MediaPlayer().apply {
-            setAudioAttributes(
-                AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_GAME)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build()
-            )
-            setDataSource(file.absolutePath)
             setVolume(volume, volume)
             prepare()
             start()

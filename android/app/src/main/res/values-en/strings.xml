@@ -277,4 +277,13 @@
     <string name="settings_theme">Dark theme</string>
     <string name="lang_ru">Russian</string>
     <string name="lang_en">English</string>
+    <string name="filter_all">All</string>
+    <string name="filter_students">Students only</string>
+    <string name="filter_teachers">Professors only</string>
+    <string name="review_show_character">Show “%1$s” character</string>
+    <string name="review_hidden_hint">Cards are closed — open one to see the character</string>
+    <string name="summary_show_character">Show “%1$s” character</string>
+    <string name="onboarding_3_title_new">Friends’ voices</string>
+    <string name="onboarding_3_body_new">The countdown, “Nice one!” and “Missed” are voiced by your crew — already built in.</string>
+    <string name="ph_voice_bank">Voices: %1$d files in the bank</string>
 </resources>

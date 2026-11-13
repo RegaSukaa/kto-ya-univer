@@ -4,8 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.kstoya.univer.data.CharacterEntity
+import com.kstoya.univer.data.assetPhotoPaths
 import com.kstoya.univer.game.COUNTDOWN_MS
 import com.kstoya.univer.game.Deck
+import com.kstoya.univer.game.DeckFilter
 import com.kstoya.univer.game.online.ConnStatus
 import com.kstoya.univer.game.online.OnlineClient
 import kotlinx.coroutines.Job
@@ -19,6 +21,8 @@ import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 data class OmPlayer(val id: String, val name: String, val ready: Boolean, val online: Boolean)
+
+data class RevealCard(val playerName: String, val character: CharacterEntity?, val photoIndex: Int)
 
 data class OnlineUiState(
     val status: ConnStatus = ConnStatus.IDLE,
@@ -39,7 +43,9 @@ data class OnlineUiState(
     val skew: Long = 0L,
     val elapsedMs: Long = -1L,
     val myCharacter: CharacterEntity? = null,
-    val reveal: List<Pair<String, String>> = emptyList(),
+    val myPhotoIndex: Int = 0,
+    val revealCards: List<RevealCard> = emptyList(),
+    val filter: String = DeckFilter.ALL,
     val hidden: Boolean = false,
     val deckMismatch: Boolean = false,
     val joined: Boolean = false,
@@ -163,9 +169,13 @@ class OnlineViewModel(app: Application) : AndroidViewModel(app) {
         _state.update { st -> st.copy(players = st.players.map { if (it.id == s.myId) it.copy(ready = ready) else it }) }
     }
 
-    fun startGame() {
+    fun startGame(filter: String = DeckFilter.ALL) {
         val s = _state.value
-        client.send(JSONObject().put("type", "start").put("showMs", s.showMs).put("alternateKinds", true))
+        _state.update { it.copy(filter = filter) }
+        client.send(
+            JSONObject().put("type", "start").put("showMs", s.showMs)
+                .put("alternateKinds", true).put("filter", filter)
+        )
     }
 
     fun sendResult(value: String) {
@@ -246,6 +256,7 @@ class OnlineViewModel(app: Application) : AndroidViewModel(app) {
                         showMs = msg.optInt("showMs", it.showMs),
                         startAt = startAt,
                         seed = msg.optLong("seed", it.seed),
+                        filter = msg.optString("filter", it.filter),
                         results = results,
                         host = msg.optString("hostId") == myId,
                         hostId = msg.optString("hostId", it.hostId),
@@ -297,15 +308,32 @@ class OnlineViewModel(app: Application) : AndroidViewModel(app) {
     private fun recomputeDeal() {
         val s = _state.value
         if (deck.isEmpty() || s.players.isEmpty() || s.myId.isBlank()) return
-        val kinds = deck.associate { it.id to it.kind }
-        val ids = deck.map { it.id }
+        val deckFiltered = DeckFilter.apply(deck, s.filter) { it.kind }
+        val kinds = deckFiltered.associate { it.id to it.kind }
+        val ids = deckFiltered.map { it.id }
         val playerIds = s.players.map { it.id }
-        if (playerIds.isEmpty()) return
+        if (playerIds.isEmpty() || ids.isEmpty()) return
         val deal = if (s.seed != 0L) Deck.deal(s.seed, ids, playerIds, true) { kinds[it] ?: "other" } else emptyMap()
-        val mine = deal[s.myId]?.let { cid -> deck.firstOrNull { it.id == cid } }
-        val reveal = if (s.phase == "reveal") s.players.map { p ->
-            p.name to (deal[p.id]?.let { cid -> deck.firstOrNull { it.id == cid }?.name } ?: "—")
+        fun entityFor(playerId: String): CharacterEntity? =
+            deal[playerId]?.let { cid -> deckFiltered.firstOrNull { it.id == cid } }
+
+        fun photoIndexFor(playerId: String, c: CharacterEntity?): Int {
+            if (c == null) return 0
+            val count = if (c.photoPath != null) 1 else c.assetPhotoPaths().size
+            if (count <= 1) return 0
+            return java.util.Random(s.seed + playerId.hashCode()).nextInt(count)
+        }
+
+        val mine = entityFor(s.myId)
+        val revealCards = if (s.phase == "reveal") s.players.map { p ->
+            RevealCard(p.name, entityFor(p.id), photoIndexFor(p.id, entityFor(p.id)))
         } else emptyList()
-        _state.update { it.copy(myCharacter = mine ?: it.myCharacter, reveal = reveal) }
+        _state.update {
+            it.copy(
+                myCharacter = mine ?: it.myCharacter,
+                myPhotoIndex = photoIndexFor(s.myId, mine),
+                revealCards = revealCards
+            )
+        }
     }
 }

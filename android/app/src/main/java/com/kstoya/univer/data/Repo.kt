@@ -212,6 +212,7 @@ class Repo(
     private data class AssetCharacter(
         val id: String, val name: String, val kind: String = "other", val bgPreset: Int = 0,
         val initials: String = "", val tags: List<String> = emptyList(), val photo: String? = null,
+        val photos: List<String> = emptyList(),
         val sounds: AssetSounds? = null, val placeholder: Boolean = true
     )
 
@@ -244,7 +245,8 @@ class Repo(
                 kind = c.kind,
                 bgPreset = c.bgPreset,
                 photoPath = old?.photoPath,
-                assetPhoto = c.photo,
+                assetPhoto = c.photos.firstOrNull() ?: c.photo,
+                assetPhotos = c.photos.takeIf { it.isNotEmpty() }?.joinToString("\u0001"),
                 initials = c.initials.ifBlank { initialsOf(c.name) },
                 createdAt = old?.createdAt ?: now,
                 updatedAt = now,

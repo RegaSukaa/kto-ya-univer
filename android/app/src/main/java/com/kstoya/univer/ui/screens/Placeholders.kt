@@ -44,12 +44,19 @@ import com.kstoya.univer.ui.components.toCardModel
 @Composable
 fun PlaceholderScreen(
     characters: List<CharacterEntity>,
-    recordedVoices: Int,
     onBack: () -> Unit,
     onRefresh: (((Int) -> Unit)) -> Unit
 ) {
     val ctx = LocalContext.current
     val assetFiles = remember { runCatching { ctx.assets.list("characters")?.toSet() ?: emptySet() }.getOrDefault(emptySet()) }
+    val voiceFiles = remember {
+        listOf("go", "guessed", "missed", "final").sumOf { slot ->
+            runCatching {
+                ctx.assets.list("voices/$slot")
+                    ?.count { it.endsWith(".m4a", true) || it.endsWith(".wav", true) } ?: 0
+            }.getOrDefault(0)
+        }
+    }
     val ownPhotos = characters.count { it.assetPhoto == null && it.photoPath != null }
     val stubs = characters.count { it.assetPhoto != null && !it.placeholder.not() && assetFiles.contains(it.assetPhoto?.substringAfterLast("/")) }
     val placeholders = characters.count { it.assetPhoto != null && (it.placeholder || (it.assetPhoto?.substringAfterLast("/")?.let { f -> assetFiles.contains(f) } == true)) }
@@ -75,7 +82,7 @@ fun PlaceholderScreen(
                     fontSize = 16.sp, fontWeight = FontWeight.Medium
                 )
                 Text(
-                    stringResource(R.string.ph_voices, recordedVoices, 4),
+                    stringResource(R.string.ph_voice_bank, voiceFiles),
                     fontSize = 16.sp, fontWeight = FontWeight.Medium
                 )
                 Spacer(Modifier.height(8.dp))
