@@ -12,3 +12,7 @@ __pycache__/
 
 # build logs
 *.log
+
+# локальные артефакты
+/ci-apk*/
+/app-debug.apk

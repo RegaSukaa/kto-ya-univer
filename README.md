@@ -16,8 +16,9 @@
 
 ## Скачать APK
 
-- Короткая ссылка: **https://is.gd/TjyI76**
-- GitHub Release: https://github.com/RegaSukaa/kto-ya-univer/releases
+- Короткая ссылка (всегда последняя версия): **https://is.gd/1SPOZF**
+- Прямая: https://github.com/RegaSukaa/kto-ya-univer/releases/latest/download/app-debug.apk
+- Все версии: https://github.com/RegaSukaa/kto-ya-univer/releases
 - Подпись: `CN=Android Debug` SHA-256 `c55f48014ba06ee465b2037b5477a00edad4b4721a6d1e737e1c130684e4ef6c`
   (ключ лежит в репозитории — обновления ставятся поверх предыдущей версии).
 
