@@ -83,7 +83,7 @@ class ScreenshotTest {
 
     @Test
     fun libraryWithRealPeople() {
-        val people = realPeople(6)
+        val people = realPeople(100)
         compose.setContent {
             KtoYaTheme(dark = true) {
                 LibraryScreen(

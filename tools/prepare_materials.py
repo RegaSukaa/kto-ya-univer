@@ -73,6 +73,11 @@ def copy_photos(src_dir: Path, dst_dir: Path) -> list[str]:
         p for p in src_dir.iterdir()
         if p.suffix.lower() in PHOTO_EXT and not p.name.lower().startswith(FLAG_PREFIXES)
     )
+    # очень мелкие кадры (мессенджер сжал) не крутим в игре, если есть нормальные
+    sized = [(p, Image.open(p).size) for p in files]
+    good = [p for p, size in sized if min(size) >= 400]
+    if good:
+        files = good
     for i, src in enumerate(files, start=1):
         img = Image.open(src)
         img = img.convert("RGBA")

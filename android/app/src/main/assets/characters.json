@@ -39,10 +39,7 @@
     "characters/friend_amir_almazovich_gr_2212/photo_4.webp",
     "characters/friend_amir_almazovich_gr_2212/photo_5.webp",
     "characters/friend_amir_almazovich_gr_2212/photo_6.webp",
-    "characters/friend_amir_almazovich_gr_2212/photo_7.webp",
-    "characters/friend_amir_almazovich_gr_2212/photo_8.webp",
-    "characters/friend_amir_almazovich_gr_2212/photo_9.webp",
-    "characters/friend_amir_almazovich_gr_2212/photo_10.webp"
+    "characters/friend_amir_almazovich_gr_2212/photo_7.webp"
    ],
    "sounds": {
     "win": null,
@@ -107,8 +104,7 @@
    "photos": [
     "characters/friend_burenkov_matvey_gr_2212/photo_1.webp",
     "characters/friend_burenkov_matvey_gr_2212/photo_2.webp",
-    "characters/friend_burenkov_matvey_gr_2212/photo_3.webp",
-    "characters/friend_burenkov_matvey_gr_2212/photo_4.webp"
+    "characters/friend_burenkov_matvey_gr_2212/photo_3.webp"
    ],
    "sounds": {
     "win": null,
@@ -127,8 +123,7 @@
    ],
    "photo": "characters/friend_danila_gr_2212/photo_1.webp",
    "photos": [
-    "characters/friend_danila_gr_2212/photo_1.webp",
-    "characters/friend_danila_gr_2212/photo_2.webp"
+    "characters/friend_danila_gr_2212/photo_1.webp"
    ],
    "sounds": {
     "win": null,
@@ -334,8 +329,7 @@
     "characters/friend_ilyuha_gr_2212/photo_7.webp",
     "characters/friend_ilyuha_gr_2212/photo_8.webp",
     "characters/friend_ilyuha_gr_2212/photo_9.webp",
-    "characters/friend_ilyuha_gr_2212/photo_10.webp",
-    "characters/friend_ilyuha_gr_2212/photo_11.webp"
+    "characters/friend_ilyuha_gr_2212/photo_10.webp"
    ],
    "sounds": {
     "win": null,
@@ -380,10 +374,7 @@
     "characters/friend_katya_gr_2212/photo_3.webp",
     "characters/friend_katya_gr_2212/photo_4.webp",
     "characters/friend_katya_gr_2212/photo_5.webp",
-    "characters/friend_katya_gr_2212/photo_6.webp",
-    "characters/friend_katya_gr_2212/photo_7.webp",
-    "characters/friend_katya_gr_2212/photo_8.webp",
-    "characters/friend_katya_gr_2212/photo_9.webp"
+    "characters/friend_katya_gr_2212/photo_6.webp"
    ],
    "sounds": {
     "win": null,
@@ -473,8 +464,7 @@
     "characters/friend_masha_mal_gr_2212/photo_6.webp",
     "characters/friend_masha_mal_gr_2212/photo_7.webp",
     "characters/friend_masha_mal_gr_2212/photo_8.webp",
-    "characters/friend_masha_mal_gr_2212/photo_9.webp",
-    "characters/friend_masha_mal_gr_2212/photo_10.webp"
+    "characters/friend_masha_mal_gr_2212/photo_9.webp"
    ],
    "sounds": {
     "win": null,
@@ -787,9 +777,7 @@
    ],
    "photo": "characters/teacher_borodin_vladimir_mihaylovich_termeh/photo_1.webp",
    "photos": [
-    "characters/teacher_borodin_vladimir_mihaylovich_termeh/photo_1.webp",
-    "characters/teacher_borodin_vladimir_mihaylovich_termeh/photo_2.webp",
-    "characters/teacher_borodin_vladimir_mihaylovich_termeh/photo_3.webp"
+    "characters/teacher_borodin_vladimir_mihaylovich_termeh/photo_1.webp"
    ],
    "sounds": {
     "win": null,
@@ -1025,9 +1013,7 @@
    "photo": "characters/teacher_shakirov_bulat_ruzalevich_fizika_laby/photo_1.webp",
    "photos": [
     "characters/teacher_shakirov_bulat_ruzalevich_fizika_laby/photo_1.webp",
-    "characters/teacher_shakirov_bulat_ruzalevich_fizika_laby/photo_2.webp",
-    "characters/teacher_shakirov_bulat_ruzalevich_fizika_laby/photo_3.webp",
-    "characters/teacher_shakirov_bulat_ruzalevich_fizika_laby/photo_4.webp"
+    "characters/teacher_shakirov_bulat_ruzalevich_fizika_laby/photo_2.webp"
    ],
    "sounds": {
     "win": null,
