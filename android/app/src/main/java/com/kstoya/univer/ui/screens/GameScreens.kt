@@ -63,7 +63,6 @@ import com.kstoya.univer.ui.components.CharacterCard
 import com.kstoya.univer.ui.components.CountdownNumber
 import com.kstoya.univer.ui.components.ProgressRing
 import com.kstoya.univer.util.Haptics
-import com.kstoya.univer.util.Share
 import com.kstoya.univer.util.findActivity
 import kotlin.math.ceil
 
@@ -298,7 +297,6 @@ fun ReviewScreen(
     onNextRound: () -> Unit,
     onExit: () -> Unit
 ) {
-    val ctx = LocalContext.current
     Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).systemBarsPadding()) {
         Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -356,16 +354,6 @@ fun ReviewScreen(
             }
         }
         Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            BigButton(
-                text = stringResource(R.string.report_telegram),
-                onClick = {
-                    val report = buildString {
-                        appendLine(ctx.getString(R.string.report_title))
-                        rounds.forEach { appendLine("${it.playerName} — ${it.characterName}") }
-                    }
-                    Share.telegram(ctx, report, ctx.getString(R.string.report_title))
-                }
-            )
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 Box(Modifier.weight(1f)) {
                     BigButton(stringResource(R.string.review_next_round), onClick = onNextRound, primary = false)

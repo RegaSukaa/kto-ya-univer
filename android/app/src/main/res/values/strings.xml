@@ -303,15 +303,13 @@
     <string name="onboarding_3_body_new">Отсчёт, «Красавчик!» и «Эх, не угадал» звучат голосами вашей компании — они уже внутри.</string>
     <string name="ph_voice_bank">Голоса: %1$d файлов в банке</string>
     <string name="rules_title">Как играть</string>
-    <string name="rules_step_1">1. Тебе выпадает персонаж. Ты его не видишь — телефон держат остальные.</string>
+    <string name="rules_step_1">1. Тебе выпадает персонаж. Ты его не видишь.</string>
     <string name="rules_step_2">2. Когда все посмотрели своих персонажей, вы по очереди задаёте вопросы про своего.</string>
     <string name="rules_step_3">3. Вопросы в основном такие, где отвечают «да» или «нет». Ответили «да» — спрашиваешь дальше. Ответили «нет» — спрашивает следующий.</string>
     <string name="rules_step_4">4. Угадал, кто ты, — победа. Всё остальное происходит вживую: телефон нужен только для карточек.</string>
     <string name="rules_button">Понятно</string>
     <string name="rules_link">Как играть</string>
     <string name="reshow_for">Карточка игрока «%1$s»</string>
-    <string name="report_telegram">Отчёт в Telegram</string>
-    <string name="report_title">Кто Я: Универ — кто кем был</string>
     <string name="onboarding_2_button">Посмотреть персонажей</string>
     <string name="onboarding_1_body_new">Тебе выпадает персонаж, ты его не видишь. Задаёшь вопросы, остальные отвечают «да» или «нет» — так и узнаёшь, кто ты.</string>
     <string name="onboarding_2_body_new">Карточки друзей и преподов уже внутри. Выбирай состав — и по кругу.</string>

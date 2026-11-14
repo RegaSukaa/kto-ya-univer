@@ -287,15 +287,13 @@
     <string name="onboarding_3_body_new">The countdown, “Nice one!” and “Missed” are voiced by your crew — already built in.</string>
     <string name="ph_voice_bank">Voices: %1$d files in the bank</string>
     <string name="rules_title">How to play</string>
-    <string name="rules_step_1">1. You get a character. You cannot see it — the others hold the phone.</string>
+    <string name="rules_step_1">1. You get a character. You cannot see it.</string>
     <string name="rules_step_2">2. When everyone has seen their character, take turns asking questions about yours.</string>
     <string name="rules_step_3">3. Ask yes/no questions. A “yes” lets you ask again. A “no” passes the turn to the next player.</string>
     <string name="rules_step_4">4. Guess who you are and you win. Everything else happens in real life: the phone only shows cards.</string>
     <string name="rules_button">Got it</string>
     <string name="rules_link">How to play</string>
     <string name="reshow_for">Card of “%1$s”</string>
-    <string name="report_telegram">Report to Telegram</string>
-    <string name="report_title">Who Am I: Campus — who was who</string>
     <string name="onboarding_2_button">See characters</string>
     <string name="onboarding_1_body_new">You get a character you cannot see. Ask questions, the others answer yes or no — that is how you find out who you are.</string>
     <string name="onboarding_2_body_new">Cards of your friends and professors are already inside. Pick the lineup and go.</string>

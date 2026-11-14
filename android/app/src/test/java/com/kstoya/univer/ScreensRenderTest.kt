@@ -110,7 +110,6 @@ class ScreensRenderTest {
         }
         (0 until 6).forEach { compose.onNodeWithText("Игрок $it").assertExists() }
         compose.onNodeWithText(ctx.getString(R.string.review_show_character, "Игрок 0")).assertExists()
-        compose.onNodeWithText(ctx.getString(R.string.report_telegram)).assertExists()
     }
 
     @Test
