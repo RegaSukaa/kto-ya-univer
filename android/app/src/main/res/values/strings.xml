@@ -319,6 +319,6 @@
     <string name="online_check">Проверить сервер</string>
     <string name="online_check_ok">Сервер отвечает</string>
     <string name="online_check_fail">Сервер не отвечает</string>
-    <string name="online_server_hint">На ПК запусти start-server.bat. Телефон и ПК должны быть в одной Wi-Fi.</string>
-    <string name="err_server_unreachable">Не удалось подключиться к %1$s. Запусти сервер на ПК (start-server.bat) и проверь адрес.</string>
+    <string name="online_server_hint">Онлайн работает через интернет. Сервер уже настроен — ПК включать не нужно.</string>
+    <string name="err_server_unreachable">Не удалось подключиться к %1$s. Проверь интернет и попробуй ещё раз.</string>
 </resources>

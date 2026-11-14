@@ -303,6 +303,6 @@
     <string name="online_check">Check server</string>
     <string name="online_check_ok">Server responds</string>
     <string name="online_check_fail">Server does not respond</string>
-    <string name="online_server_hint">Run start-server.bat on the PC. The phone and the PC must be on the same Wi-Fi.</string>
-    <string name="err_server_unreachable">Cannot connect to %1$s. Start the server on the PC (start-server.bat) and check the address.</string>
+    <string name="online_server_hint">Online works over the internet. The server is already set up — no PC needed.</string>
+    <string name="err_server_unreachable">Cannot connect to %1$s. Check your internet and try again.</string>
 </resources>

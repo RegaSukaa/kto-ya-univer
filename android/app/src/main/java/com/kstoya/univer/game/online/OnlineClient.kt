@@ -1,6 +1,7 @@
 package com.kstoya.univer.game.online
 
 import android.util.Log
+import com.kstoya.univer.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -13,7 +14,7 @@ enum class ConnStatus { IDLE, CONNECTING, CONNECTED, FAILED, CLOSED }
 
 class OnlineClient {
     private val http = OkHttpClient.Builder()
-        .connectTimeout(20, TimeUnit.SECONDS)
+        .connectTimeout(45, TimeUnit.SECONDS)
         .readTimeout(0, TimeUnit.MILLISECONDS)
         .pingInterval(20, TimeUnit.SECONDS)
         .build()
@@ -59,7 +60,7 @@ class OnlineClient {
     /** http(s)://host:port или host:port → ws(s)://host:port/ws */
     fun normalize(raw: String): String {
         var s = raw.trim()
-        if (s.isEmpty()) s = "ws://10.0.2.2:8080/ws"
+        if (s.isEmpty()) s = BuildConfig.SERVER_URL
         s = when {
             s.startsWith("wss://") || s.startsWith("ws://") -> s
             s.startsWith("https://") -> "wss://" + s.removePrefix("https://")

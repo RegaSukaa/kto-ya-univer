@@ -46,7 +46,13 @@ class Prefs(private val context: Context) {
             tapHide = p[K.TAP_HIDE] ?: true,
             voiceVolume = p[K.VOICE_VOL] ?: 1f,
             serverUrl = p[K.SERVER]
-                ?.takeIf { it.isNotBlank() && !it.contains("10.0.2.2") && !it.contains("localhost") && !it.contains("127.0.0.1") }
+                ?.takeIf {
+                    it.isNotBlank() &&
+                        !it.contains("10.0.2.2") &&
+                        !it.contains("localhost") &&
+                        !it.contains("127.0.0.1") &&
+                        !it.contains("192.168.")
+                }
                 ?: BuildConfig.SERVER_URL,
             darkTheme = p[K.DARK] ?: true,
             deckFilter = p[K.DECK_FILTER] ?: DeckFilter.ALL
