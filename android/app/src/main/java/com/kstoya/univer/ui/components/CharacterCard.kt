@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,6 +21,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,7 +39,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -63,15 +70,10 @@ fun CharacterCard(
 ) {
     val corner = (28 * scale).dp
     val shape = RoundedCornerShape(corner)
-    Box(
+    BoxWithConstraints(
         modifier = modifier.clip(shape).background(presetFor(card.kind, card.bgPreset).brush())
     ) {
-        val nameSize = when {
-            card.name.length <= 10 -> 64f
-            card.name.length <= 16 -> 54f
-            card.name.length <= 22 -> 44f
-            else -> 38f
-        } * scale
+        val nameWidth = maxWidth - (36 * scale).dp
         Column(
             modifier = Modifier.fillMaxSize().padding((18 * scale).dp),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -114,16 +116,10 @@ fun CharacterCard(
                 PhotoOrInitials(card, scale)
             }
             Spacer(Modifier.height((10 * scale).dp))
-            Text(
+            AutoSizeName(
                 text = card.name,
-                color = Color.White,
-                fontSize = nameSize.sp,
-                lineHeight = (nameSize * 1.05f).sp,
-                fontWeight = FontWeight.Bold,
-                letterSpacing = (-0.5 * scale).sp,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Center,
+                width = nameWidth,
+                scale = scale,
                 modifier = Modifier.fillMaxWidth()
             )
             if (card.tags.isNotEmpty()) {
@@ -141,6 +137,55 @@ fun CharacterCard(
             }
         }
     }
+}
+
+@Composable
+private fun AutoSizeName(text: String, width: Dp, scale: Float, modifier: Modifier = Modifier) {
+    val measurer = rememberTextMeasurer()
+    val density = LocalDensity.current
+    val widthPx = with(density) { width.roundToPx() }.coerceAtLeast(1)
+    val maxFont = 64f * scale
+    val minFont = maxOf(10f, 15f * scale)
+    val fitted = remember(text, widthPx, scale) {
+        val base = TextStyle(
+            fontWeight = FontWeight.Bold,
+            letterSpacing = (-0.5f * scale).sp,
+            textAlign = TextAlign.Center,
+            fontFamily = FontFamily.Default
+        )
+        fun fits(size: Float, lines: Int): Boolean {
+            val result = measurer.measure(
+                text = AnnotatedString(text),
+                style = base.copy(fontSize = size.sp, lineHeight = (size * 1.08f).sp),
+                maxLines = lines,
+                constraints = Constraints(maxWidth = widthPx),
+                overflow = TextOverflow.Clip
+            )
+            return !result.hasVisualOverflow
+        }
+        var size = maxFont
+        while (size > minFont && !fits(size, 2)) size -= 1.5f
+        if (fits(size, 2)) {
+            size to 2
+        } else {
+            var three = maxFont
+            while (three > minFont && !fits(three, 3)) three -= 1.5f
+            if (fits(three, 3)) three to 3 else minFont to 3
+        }
+    }
+    Text(
+        text = text,
+        color = Color.White,
+        fontSize = fitted.first.sp,
+        lineHeight = (fitted.first * 1.08f).sp,
+        fontWeight = FontWeight.Bold,
+        letterSpacing = (-0.5f * scale).sp,
+        maxLines = fitted.second,
+        overflow = TextOverflow.Clip,
+        softWrap = true,
+        textAlign = TextAlign.Center,
+        modifier = modifier
+    )
 }
 
 @Composable

@@ -144,7 +144,7 @@ fun SetupScreen(
             }
 
             Spacer(Modifier.height(24.dp))
-            SectionTitle(stringResource(R.string.setup_deck))
+            SectionTitle(stringResource(R.string.setup_deck_choose))
             Spacer(Modifier.height(8.dp))
             ChipRow(
                 listOf(
@@ -193,7 +193,7 @@ fun SetupScreen(
                 stringResource(R.string.setup_secs, 20),
                 stringResource(R.string.setup_secs, 30)
             )
-            ChipRow(timeLabels, times.indexOfFirst { it * 1000 == showMs }.coerceAtLeast(1)) { i ->
+            ChipRow(timeLabels, com.kstoya.univer.util.showTimeIndex(showMs)) { i ->
                 showMs = times[i] * 1000
             }
 

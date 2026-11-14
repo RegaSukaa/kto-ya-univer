@@ -117,7 +117,7 @@ fun SettingsScreen(
                     )
                     ChipRow(
                         timeLabels,
-                        times.indexOfFirst { it * 1000 == settings.showMs }.coerceAtLeast(1)
+                        com.kstoya.univer.util.showTimeIndex(settings.showMs)
                     ) { i -> onShowMs(times[i] * 1000) }
                     Spacer(Modifier.height(8.dp))
                     ToggleRow(stringResource(R.string.settings_tap_hide), settings.tapHide, onTapHide)

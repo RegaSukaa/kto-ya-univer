@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.test.assertIsNotSelected
+import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.unit.dp
@@ -67,6 +69,27 @@ class ScreensRenderTest {
         }
         compose.onNodeWithText(ctx.getString(R.string.setup_start)).assertExists()
         compose.onNodeWithText(ctx.getString(R.string.setup_show_time)).assertExists()
+    }
+
+    @Test
+    fun fiveSecondChipIsSelected() {
+        val ctx = ApplicationProvider.getApplicationContext<android.content.Context>()
+        compose.setContent {
+            KtoYaTheme {
+                SetupScreen(
+                    characters = chars(12),
+                    settings = Settings(showMs = 5_000),
+                    presets = emptyList(),
+                    presetNames = { emptyList() },
+                    onBack = {},
+                    onSavePreset = { _, _ -> },
+                    onStart = { _, _, _ -> },
+                    onRules = {}
+                )
+            }
+        }
+        compose.onNodeWithText(ctx.getString(R.string.setup_secs, 5)).assertIsSelected()
+        compose.onNodeWithText(ctx.getString(R.string.setup_secs, 10)).assertIsNotSelected()
     }
 
     @Test

@@ -10,12 +10,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.unit.dp
 import com.kstoya.univer.data.CharacterEntity
+import com.kstoya.univer.data.Settings
 import com.kstoya.univer.game.RoundInfo
 import com.kstoya.univer.ui.components.CharacterCard
 import com.kstoya.univer.ui.components.toCardModel
 import com.kstoya.univer.ui.screens.HomeScreen
+import com.kstoya.univer.ui.screens.SetupScreen
 import com.kstoya.univer.ui.screens.LibraryScreen
 import com.kstoya.univer.ui.screens.ReviewScreen
 import com.kstoya.univer.ui.theme.KtoYaTheme
@@ -109,6 +113,43 @@ class ScreenshotTest {
             }
         }
         save("s1_home")
+    }
+
+    @Test
+    fun setupFiveSeconds() {
+        compose.setContent {
+            KtoYaTheme(dark = true) {
+                SetupScreen(
+                    characters = realPeople(10),
+                    settings = Settings(showMs = 5_000),
+                    presets = emptyList(),
+                    presetNames = { emptyList() },
+                    onBack = {},
+                    onSavePreset = { _, _ -> },
+                    onStart = { _, _, _ -> },
+                    onRules = {}
+                )
+            }
+        }
+        compose.onNodeWithText("5 с").performScrollTo()
+        save("s3_setup")
+    }
+
+    @Test
+    fun cardWithLongestName() {
+        val person = realPeople(100).maxByOrNull { it.name.length }!!
+        compose.setContent {
+            KtoYaTheme(dark = true) {
+                Box(Modifier.fillMaxSize().background(Color.Black)) {
+                    CharacterCard(
+                        card = person.toCardModel(),
+                        modifier = Modifier.fillMaxSize().padding(20.dp),
+                        roundLabel = "Игрок 1 из 6"
+                    )
+                }
+            }
+        }
+        save("s4_card_long")
     }
 
     @Test

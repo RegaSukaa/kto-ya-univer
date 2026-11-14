@@ -2,6 +2,7 @@ package com.kstoya.univer.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.Arrangement
@@ -79,7 +80,7 @@ fun ChipRow(items: List<String>, selected: Int, modifier: Modifier = Modifier, o
                 modifier = Modifier
                     .clip(RoundedCornerShape(12.dp))
                     .background(if (isSel) MaterialTheme.colorScheme.primary else Color.White.copy(alpha = 0.08f))
-                    .clickable { onSelect(i) }
+                    .selectable(selected = isSel, onClick = { onSelect(i) })
                     .padding(horizontal = 14.dp, vertical = 10.dp),
                 contentAlignment = Alignment.Center
             ) {
