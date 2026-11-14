@@ -16,8 +16,6 @@ private val Context.dataStore by preferencesDataStore("ktya_settings")
 
 data class Settings(
     val showMs: Int = 10_000,
-    val alternateKinds: Boolean = true,
-    val markAfter: Boolean = false,
     val sound: Boolean = true,
     val vibrate: Boolean = true,
     val tapHide: Boolean = true,
@@ -31,8 +29,6 @@ data class Settings(
 class Prefs(private val context: Context) {
     private object K {
         val SHOW_MS = intPreferencesKey("show_ms")
-        val ALTERNATE = booleanPreferencesKey("alternate")
-        val MARK_AFTER = booleanPreferencesKey("mark_after")
         val SOUND = booleanPreferencesKey("sound")
         val VIBRATE = booleanPreferencesKey("vibrate")
         val TAP_HIDE = booleanPreferencesKey("tap_hide")
@@ -45,8 +41,6 @@ class Prefs(private val context: Context) {
     val settings: Flow<Settings> get() = context.dataStore.data.map { p ->
         Settings(
             showMs = p[K.SHOW_MS] ?: 10_000,
-            alternateKinds = p[K.ALTERNATE] ?: true,
-            markAfter = p[K.MARK_AFTER] ?: false,
             sound = p[K.SOUND] ?: true,
             vibrate = p[K.VIBRATE] ?: true,
             tapHide = p[K.TAP_HIDE] ?: true,
@@ -58,8 +52,6 @@ class Prefs(private val context: Context) {
     }
 
     suspend fun setShowMs(v: Int) = context.dataStore.edit { it[K.SHOW_MS] = v }
-    suspend fun setAlternate(v: Boolean) = context.dataStore.edit { it[K.ALTERNATE] = v }
-    suspend fun setMarkAfter(v: Boolean) = context.dataStore.edit { it[K.MARK_AFTER] = v }
     suspend fun setSound(v: Boolean) = context.dataStore.edit { it[K.SOUND] = v }
     suspend fun setVibrate(v: Boolean) = context.dataStore.edit { it[K.VIBRATE] = v }
     suspend fun setTapHide(v: Boolean) = context.dataStore.edit { it[K.TAP_HIDE] = v }

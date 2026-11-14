@@ -7,18 +7,12 @@ import org.junit.Test
 
 class SoundPriorityTest {
     @Test
-    fun `personal voice wins`() {
-        assertEquals(SoundSource.PERSONAL, SoundPriority.resolve(true, true))
-        assertEquals(SoundSource.PERSONAL, SoundPriority.resolve(true, false))
-    }
-
-    @Test
-    fun `voice bank is second`() {
-        assertEquals(SoundSource.BANK, SoundPriority.resolve(false, true))
+    fun `voice bank wins over built-in tone`() {
+        assertEquals(SoundSource.BANK, SoundPriority.resolve(true))
     }
 
     @Test
     fun `never silence`() {
-        assertEquals(SoundSource.ASSET, SoundPriority.resolve(false, false))
+        assertEquals(SoundSource.ASSET, SoundPriority.resolve(false))
     }
 }

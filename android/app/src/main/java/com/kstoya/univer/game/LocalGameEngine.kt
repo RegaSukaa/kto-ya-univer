@@ -1,6 +1,6 @@
 package com.kstoya.univer.game
 
-enum class LocalPhase { PASS, COUNTDOWN, SHOW, MARK, REVIEW }
+enum class LocalPhase { PASS, COUNTDOWN, SHOW, REVIEW }
 
 data class PlayerSlot(val id: String, val name: String)
 
@@ -18,14 +18,14 @@ const val GO_MS = 400L
 const val COUNTDOWN_MS = 3 * COUNT_STEP_MS + GO_MS // 2800
 
 /**
- * Конечный автомат одного телефона. Время передаётся снаружи (SystemClock.elapsedRealtime),
- * поэтому вся механика проверяется юнит-тестом на виртуальном времени.
+ * Механика без счёта: передача → отсчёт → карточка → следующий.
+ * Результаты не фиксируются, «угадал/не угадал» в приложении нет —
+ * обсуждение и вопросы происходят вживую.
  */
 class LocalGameEngine(
     val players: List<PlayerSlot>,
     val rounds: List<RoundInfo>,
-    val showMs: Int,
-    val markAfter: Boolean
+    val showMs: Int
 ) {
     var phase: LocalPhase = LocalPhase.PASS
         private set
@@ -35,7 +35,6 @@ class LocalGameEngine(
         private set
     var finished: Boolean = false
         private set
-    val results: MutableMap<String, String?> = LinkedHashMap()
 
     val current: RoundInfo get() = rounds[index.coerceIn(0, (rounds.size - 1).coerceAtLeast(0))]
 
@@ -44,8 +43,6 @@ class LocalGameEngine(
         index = 0
         phaseStart = now
         finished = false
-        results.clear()
-        rounds.forEach { results[it.playerId] = null }
     }
 
     fun ready(now: Long) {
@@ -69,12 +66,7 @@ class LocalGameEngine(
                 LocalPhase.SHOW -> {
                     val end = phaseStart + showMs
                     if (now >= end) {
-                        if (markAfter) {
-                            phase = LocalPhase.MARK
-                            phaseStart = end
-                        } else {
-                            advance(end)
-                        }
+                        advance(end)
                     } else return
                 }
                 else -> return
@@ -89,26 +81,7 @@ class LocalGameEngine(
     }
 
     /** 3, 2, 1, затем 0 = «Погнали!» */
-    fun countdownDigit(now: Long): Int {
-        val elapsed = now - phaseStart
-        return when {
-            elapsed < COUNT_STEP_MS -> 3
-            elapsed < 2 * COUNT_STEP_MS -> 2
-            elapsed < 3 * COUNT_STEP_MS -> 1
-            else -> 0
-        }
-    }
-
-    fun mark(now: Long, value: String) {
-        if (phase != LocalPhase.MARK) return
-        results[current.playerId] = value
-        advance(now)
-    }
-
-    fun skipRound(now: Long) {
-        results[current.playerId] = "skipped"
-        advance(now)
-    }
+    fun countdownDigit(now: Long): Int = digitFor(now - phaseStart)
 
     fun cancel(now: Long) {
         if (phase == LocalPhase.COUNTDOWN || phase == LocalPhase.SHOW) {
@@ -128,10 +101,6 @@ class LocalGameEngine(
         phaseStart = now
     }
 
-    fun setResult(playerId: String, value: String?) {
-        results[playerId] = value
-    }
-
     fun finish(now: Long) {
         finished = true
         phase = LocalPhase.REVIEW
@@ -139,44 +108,9 @@ class LocalGameEngine(
     }
 }
 
-data class SummaryStats(
-    val guessed: Int,
-    val total: Int,
-    val best: List<String>,
-    val friendGuessed: Int,
-    val friendTotal: Int,
-    val teacherGuessed: Int,
-    val teacherTotal: Int,
-    val avgShowSec: Int
-)
-
-fun summarize(
-    rounds: List<RoundInfo>,
-    results: Map<String, String?>,
-    kindOf: (String) -> String,
-    showMs: Int
-): SummaryStats {
-    val total = rounds.size
-    val guessed = rounds.count { results[it.playerId] == "guessed" }
-    val scores = rounds.groupBy { it.playerId }.map { (id, rs) ->
-        id to rs.count { results[it.playerId] == "guessed" }
-    }
-    val max = scores.maxOfOrNull { it.second } ?: 0
-    val best = if (max <= 0) emptyList() else scores.filter { it.second == max }.map { s ->
-        rounds.firstOrNull { it.playerId == s.first }?.playerName ?: ""
-    }
-    val fTotal = rounds.count { kindOf(it.characterId) == "friend" }
-    val tTotal = rounds.count { kindOf(it.characterId) == "teacher" }
-    val fGuessed = rounds.count { kindOf(it.characterId) == "friend" && results[it.playerId] == "guessed" }
-    val tGuessed = rounds.count { kindOf(it.characterId) == "teacher" && results[it.playerId] == "guessed" }
-    return SummaryStats(
-        guessed = guessed,
-        total = total,
-        best = best,
-        friendGuessed = fGuessed,
-        friendTotal = fTotal,
-        teacherGuessed = tGuessed,
-        teacherTotal = tTotal,
-        avgShowSec = showMs / 1000
-    )
+fun digitFor(elapsed: Long): Int = when {
+    elapsed < COUNT_STEP_MS -> 3
+    elapsed < 2 * COUNT_STEP_MS -> 2
+    elapsed < 3 * COUNT_STEP_MS -> 1
+    else -> 0
 }

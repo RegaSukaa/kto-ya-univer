@@ -58,7 +58,7 @@ data class OnlineUiState(
                 elapsedMs < 0 -> "countdown"
                 elapsedMs < COUNTDOWN_MS -> "countdown"
                 elapsedMs < COUNTDOWN_MS + showMs -> "show"
-                else -> "mark"
+                else -> "done"
             }
             else -> phase
         }

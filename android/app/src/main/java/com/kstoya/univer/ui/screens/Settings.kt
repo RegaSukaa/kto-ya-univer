@@ -58,8 +58,6 @@ fun SettingsScreen(
     language: String,
     onBack: () -> Unit,
     onShowMs: (Int) -> Unit,
-    onAlternate: (Boolean) -> Unit,
-    onMarkAfter: (Boolean) -> Unit,
     onSound: (Boolean) -> Unit,
     onVibrate: (Boolean) -> Unit,
     onTapHide: (Boolean) -> Unit,
@@ -122,8 +120,6 @@ fun SettingsScreen(
                         times.indexOfFirst { it * 1000 == settings.showMs }.coerceAtLeast(1)
                     ) { i -> onShowMs(times[i] * 1000) }
                     Spacer(Modifier.height(8.dp))
-                    ToggleRow(stringResource(R.string.settings_alternate), settings.alternateKinds, onAlternate)
-                    ToggleRow(stringResource(R.string.settings_mark_after), settings.markAfter, onMarkAfter)
                     ToggleRow(stringResource(R.string.settings_tap_hide), settings.tapHide, onTapHide)
                     ToggleRow(stringResource(R.string.app_name) + " — " + stringResource(R.string.settings_theme), settings.darkTheme, onDarkTheme)
                     Spacer(Modifier.height(10.dp))

@@ -64,14 +64,12 @@ fun SetupScreen(
     presetNames: (PresetEntity) -> List<String>,
     onBack: () -> Unit,
     onSavePreset: (String, List<String>) -> Unit,
-    onStart: (List<String>, Int, Boolean, Boolean, String) -> Unit,
-    onAddCharacters: () -> Unit
+    onStart: (List<String>, Int, String) -> Unit,
+    onRules: () -> Unit
 ) {
     var count by rememberSaveable { mutableStateOf(6) }
     val names = remember { mutableStateListOf<String>().apply { repeat(10) { add("") } } }
     var showMs by rememberSaveable { mutableStateOf(settings.showMs) }
-    var alternate by rememberSaveable { mutableStateOf(settings.alternateKinds) }
-    var markAfter by rememberSaveable { mutableStateOf(settings.markAfter) }
     var filter by rememberSaveable { mutableStateOf(settings.deckFilter) }
     var presetTitle by remember { mutableStateOf("") }
     var showSaveDialog by remember { mutableStateOf(false) }
@@ -182,7 +180,6 @@ fun SetupScreen(
             }
             if (deckChars.size < 2) {
                 Text(stringResource(R.string.setup_need_characters), color = MaterialTheme.colorScheme.error, fontSize = 14.sp)
-                TextButton(onClick = onAddCharacters) { Text(stringResource(R.string.onboarding_add_chars)) }
             }
 
             Spacer(Modifier.height(24.dp))
@@ -200,13 +197,8 @@ fun SetupScreen(
                 showMs = times[i] * 1000
             }
 
-            Spacer(Modifier.height(16.dp))
-            CardSurface {
-                Column {
-                    ToggleRow(stringResource(R.string.setup_alternate), alternate, { alternate = it })
-                    ToggleRow(stringResource(R.string.setup_mark_after), markAfter, { markAfter = it })
-                }
-            }
+            Spacer(Modifier.height(8.dp))
+            TextButton(onClick = onRules) { Text(stringResource(R.string.rules_link)) }
 
             Spacer(Modifier.height(24.dp))
             if (filledCount < 2) {
@@ -215,7 +207,7 @@ fun SetupScreen(
             }
             BigButton(
                 text = stringResource(R.string.setup_start),
-                onClick = { onStart(filledNames, showMs, alternate, markAfter, filter) },
+                onClick = { onStart(filledNames, showMs, filter) },
                 enabled = canStart
             )
             Spacer(Modifier.height(32.dp))

@@ -2,34 +2,30 @@ package com.kstoya.univer.ui.screens
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -57,26 +53,21 @@ import com.kstoya.univer.R
 import com.kstoya.univer.data.CharacterEntity
 import com.kstoya.univer.data.ImportPolicy
 import com.kstoya.univer.data.ImportPreview
-import com.kstoya.univer.ui.components.BigButton
 import com.kstoya.univer.ui.components.CharacterCard
 import com.kstoya.univer.ui.components.ChipRow
 import com.kstoya.univer.ui.components.toCardModel
 import com.kstoya.univer.util.Share
 import java.io.File
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+/** Каталог персонажей. Только просмотр: лица приходят из assets, добавлять их в приложении нельзя. */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LibraryScreen(
     characters: List<CharacterEntity>,
     onBack: () -> Unit,
-    onAdd: () -> Unit,
-    onEdit: (CharacterEntity) -> Unit,
-    onDeleted: (CharacterEntity) -> Unit,
-    onDuplicate: (CharacterEntity) -> Unit,
     onExport: (List<CharacterEntity>, String) -> File?,
     onImport: (android.net.Uri, (ImportPreview?) -> Unit) -> Unit,
-    onApplyImport: (ImportPreview, ImportPolicy, (Int) -> Unit) -> Unit,
-    onPlay: () -> Unit
+    onApplyImport: (ImportPreview, ImportPolicy, (Int) -> Unit) -> Unit
 ) {
     val ctx = LocalContext.current
     val exportTitle = stringResource(R.string.share_subject)
@@ -84,9 +75,8 @@ fun LibraryScreen(
     var filter by remember { mutableIntStateOf(0) }
     var sort by remember { mutableIntStateOf(0) }
     var menuOpen by remember { mutableStateOf(false) }
-    var selected by remember { mutableStateOf<CharacterEntity?>(null) }
-    var deleteFor by remember { mutableStateOf<CharacterEntity?>(null) }
-    var preview by remember { mutableStateOf<ImportPreview?>(null) }
+    var preview by remember { mutableStateOf<CharacterEntity?>(null) }
+    var importPreview by remember { mutableStateOf<ImportPreview?>(null) }
     var message by remember { mutableStateOf<String?>(null) }
 
     val importLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
@@ -94,7 +84,7 @@ fun LibraryScreen(
             if (p == null) message = ctx.getString(R.string.import_failed)
             else if (p.conflicts.isEmpty()) {
                 onApplyImport(p, ImportPolicy.REPLACE) { n -> message = ctx.getString(R.string.import_done, n) }
-            } else preview = p
+            } else importPreview = p
         }
     }
 
@@ -176,15 +166,6 @@ fun LibraryScreen(
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
         },
-        floatingActionButton = {
-            ExtendedFloatingActionButton(
-                onClick = onAdd,
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
-                icon = { Icon(Icons.Filled.Add, contentDescription = null) },
-                text = { Text(stringResource(R.string.lib_add)) }
-            )
-        },
         containerColor = MaterialTheme.colorScheme.background
     ) { pad ->
         Column(Modifier.padding(pad).fillMaxSize()) {
@@ -212,95 +193,70 @@ fun LibraryScreen(
                     verticalArrangement = Arrangement.Center
                 ) {
                     Text(stringResource(R.string.lib_empty), fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Spacer(Modifier.height(16.dp))
-                    BigButton(stringResource(R.string.lib_add), onClick = onAdd)
                 }
             } else {
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(2),
-                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 96.dp),
+                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 24.dp),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                     modifier = Modifier.fillMaxSize()
                 ) {
                     items(filtered, key = { it.id }) { c ->
-                        Column {
-                            CharacterCard(
-                                card = c.toCardModel(),
-                                modifier = Modifier.fillMaxWidth().aspectRatio(0.75f).clip(RoundedCornerShape(16.dp))
-                                    .combinedClickable(
-                                        onClick = { onEdit(c) },
-                                        onLongClick = { selected = c }
-                                    ),
-                                scale = 0.55f
-                            )
-                            if (c.assetPhoto == null && c.photoPath == null) {
-                                Text(
-                                    stringResource(R.string.lib_no_photo),
-                                    fontSize = 11.sp,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                        }
+                        CharacterCard(
+                            card = c.toCardModel(),
+                            modifier = Modifier.fillMaxWidth().aspectRatio(0.75f)
+                                .clip(RoundedCornerShape(16.dp))
+                                .clickable { preview = c },
+                            scale = 0.55f
+                        )
                     }
                 }
             }
         }
     }
 
-    selected?.let { c ->
-        AlertDialog(
-            onDismissRequest = { selected = null },
-            title = { Text(c.name) },
-            text = {
-                Column {
-                    TextButton(onClick = { selected = null; onEdit(c) }) { Text(stringResource(R.string.lib_edit)) }
-                    TextButton(onClick = { selected = null; onDuplicate(c) }) { Text(stringResource(R.string.lib_duplicate)) }
-                    TextButton(onClick = { selected = null; deleteFor = c }) {
-                        Text(stringResource(R.string.common_delete), color = MaterialTheme.colorScheme.error)
-                    }
-                }
-            },
-            confirmButton = { TextButton(onClick = { selected = null }) { Text(stringResource(R.string.common_cancel)) } }
-        )
+    preview?.let { c ->
+        Box(Modifier.fillMaxSize().background(androidx.compose.ui.graphics.Color.Black)) {
+            CharacterCard(
+                card = c.toCardModel(),
+                modifier = Modifier.fillMaxSize().padding(20.dp).clickable { preview = null }
+            )
+            IconButton(
+                onClick = { preview = null },
+                modifier = Modifier.align(Alignment.TopStart).padding(8.dp)
+            ) {
+                Icon(
+                    Icons.Filled.Close,
+                    contentDescription = stringResource(R.string.review_close),
+                    tint = androidx.compose.ui.graphics.Color.White
+                )
+            }
+        }
     }
 
-    deleteFor?.let { c ->
+    importPreview?.let { p ->
         AlertDialog(
-            onDismissRequest = { deleteFor = null },
-            title = { Text(stringResource(R.string.common_delete)) },
-            text = { Text(stringResource(R.string.lib_delete_confirm, c.name)) },
-            confirmButton = {
-                TextButton(onClick = { onDeleted(c); deleteFor = null }) {
-                    Text(stringResource(R.string.common_delete), color = MaterialTheme.colorScheme.error)
-                }
-            },
-            dismissButton = { TextButton(onClick = { deleteFor = null }) { Text(stringResource(R.string.common_cancel)) } }
-        )
-    }
-
-    preview?.let { p ->
-        AlertDialog(
-            onDismissRequest = { preview = null },
+            onDismissRequest = { importPreview = null },
             title = { Text(stringResource(R.string.import_title)) },
             text = { Text(stringResource(R.string.import_conflict) + " (" + p.conflicts.size + ")") },
             confirmButton = {
                 Column {
                     TextButton(onClick = {
                         onApplyImport(p, ImportPolicy.REPLACE) { n -> message = ctx.getString(R.string.import_done, n) }
-                        preview = null
+                        importPreview = null
                     }) { Text(stringResource(R.string.import_replace)) }
                     TextButton(onClick = {
                         onApplyImport(p, ImportPolicy.DUPLICATE) { n -> message = ctx.getString(R.string.import_done, n) }
-                        preview = null
+                        importPreview = null
                     }) { Text(stringResource(R.string.import_duplicate)) }
                     TextButton(onClick = {
                         onApplyImport(p, ImportPolicy.KEEP) { n -> message = ctx.getString(R.string.import_done, n) }
-                        preview = null
+                        importPreview = null
                     }) { Text(stringResource(R.string.import_keep)) }
                 }
             },
-            dismissButton = { TextButton(onClick = { preview = null }) { Text(stringResource(R.string.common_cancel)) } }
+            dismissButton = { TextButton(onClick = { importPreview = null }) { Text(stringResource(R.string.common_cancel)) } }
         )
     }
 

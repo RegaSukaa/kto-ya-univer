@@ -12,14 +12,13 @@ import androidx.test.core.app.ApplicationProvider
 import com.kstoya.univer.data.CharacterEntity
 import com.kstoya.univer.data.Settings
 import com.kstoya.univer.game.RoundInfo
-import com.kstoya.univer.game.SummaryStats
 import com.kstoya.univer.ui.components.CharacterCard
 import com.kstoya.univer.ui.components.fallbackCard
 import com.kstoya.univer.ui.components.toCardModel
 import com.kstoya.univer.ui.screens.HomeScreen
 import com.kstoya.univer.ui.screens.ReviewScreen
 import com.kstoya.univer.ui.screens.SetupScreen
-import com.kstoya.univer.ui.screens.SummaryScreen
+import com.kstoya.univer.ui.screens.RulesScreen
 import com.kstoya.univer.ui.theme.KtoYaTheme
 import org.junit.Rule
 import org.junit.Test
@@ -44,7 +43,7 @@ class ScreensRenderTest {
     @Test
     fun homeShowsLocalGameButton() {
         compose.setContent {
-            KtoYaTheme { HomeScreen(characters = chars(3), onLocal = {}, onOnline = {}, onLibrary = {}, onSettings = {}) }
+            KtoYaTheme { HomeScreen(characters = chars(3), onLocal = {}, onOnline = {}, onLibrary = {}, onSettings = {}, onRules = {}) }
         }
         compose.onNodeWithText(ApplicationProvider.getApplicationContext<android.content.Context>().getString(R.string.home_local)).assertExists()
     }
@@ -61,8 +60,8 @@ class ScreensRenderTest {
                     presetNames = { emptyList() },
                     onBack = {},
                     onSavePreset = { _, _ -> },
-                    onStart = { _, _, _, _, _ -> },
-                    onAddCharacters = {}
+                    onStart = { _, _, _ -> },
+                    onRules = {}
                 )
             }
         }
@@ -105,34 +104,20 @@ class ScreensRenderTest {
             KtoYaTheme {
                 ReviewScreen(
                     rounds = rounds,
-                    results = results,
-                    onReshow = {}, onSetResult = { _, _ -> }, onNextRound = {}, onOpenSummary = {}, onExit = {}
+                    onReshow = {}, onNextRound = {}, onExit = {}
                 )
             }
         }
         (0 until 6).forEach { compose.onNodeWithText("Игрок $it").assertExists() }
-        compose.onNodeWithText("✓ " + ctx.getString(R.string.review_status_guessed)).assertExists()
-        compose.onNodeWithText(ctx.getString(R.string.review_finish)).assertExists()
         compose.onNodeWithText(ctx.getString(R.string.review_show_character, "Игрок 0")).assertExists()
+        compose.onNodeWithText(ctx.getString(R.string.report_telegram)).assertExists()
     }
 
     @Test
-    fun summaryShowsScore() {
+    fun rulesExplainTheYesNoLoop() {
         val ctx = ApplicationProvider.getApplicationContext<android.content.Context>()
-        val rounds = (0 until 6).map { RoundInfo("p$it", "Игрок $it", "c$it", "Персонаж $it") }
-        val results = (0 until 4).associate { "p$it" to "guessed" }
-        compose.setContent {
-            KtoYaTheme {
-                SummaryScreen(
-                    rounds = rounds,
-                    results = results,
-                    stats = SummaryStats(4, 6, listOf("Игрок 0"), 3, 3, 1, 3, 10),
-                    scored = true,
-                    onShowCharacter = {},
-                    onNextRound = {}, onExit = {}
-                )
-            }
-        }
-        compose.onNodeWithText(ctx.getString(R.string.summary_score, 4, 6)).assertExists()
+        compose.setContent { KtoYaTheme { RulesScreen(onBack = {}) } }
+        compose.onNodeWithText(ctx.getString(R.string.rules_title)).assertExists()
+        compose.onNodeWithText(ctx.getString(R.string.rules_step_3)).assertExists()
     }
 }

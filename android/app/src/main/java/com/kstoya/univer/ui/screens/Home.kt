@@ -34,7 +34,8 @@ fun HomeScreen(
     onLocal: () -> Unit,
     onOnline: () -> Unit,
     onLibrary: () -> Unit,
-    onSettings: () -> Unit
+    onSettings: () -> Unit,
+    onRules: () -> Unit
 ) {
     val canPlay = characters.size >= 2
     Column(
@@ -77,7 +78,13 @@ fun HomeScreen(
             text = stringResource(R.string.home_local),
             onClick = { if (canPlay) onLocal() else onLibrary() },
             enabled = true,
-            subtitle = if (canPlay) stringResource(R.string.home_hint) else stringResource(R.string.home_add_chars)
+            subtitle = if (canPlay) stringResource(R.string.home_hint) else stringResource(R.string.onboarding_2_button)
+        )
+        Spacer(Modifier.height(12.dp))
+        BigButton(
+            text = stringResource(R.string.rules_link),
+            onClick = onRules,
+            primary = false
         )
         Spacer(Modifier.height(12.dp))
         BigButton(

@@ -50,7 +50,7 @@ fun PlaceholderScreen(
     val ctx = LocalContext.current
     val assetFiles = remember { runCatching { ctx.assets.list("characters")?.toSet() ?: emptySet() }.getOrDefault(emptySet()) }
     val voiceFiles = remember {
-        listOf("go", "guessed", "missed", "final").sumOf { slot ->
+        listOf("go", "final").sumOf { slot ->
             runCatching {
                 ctx.assets.list("voices/$slot")
                     ?.count { it.endsWith(".m4a", true) || it.endsWith(".wav", true) } ?: 0

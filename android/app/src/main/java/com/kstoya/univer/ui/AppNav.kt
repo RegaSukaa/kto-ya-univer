@@ -4,20 +4,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.kstoya.univer.AppViewModel
 import com.kstoya.univer.ui.screens.AboutScreen
-import com.kstoya.univer.ui.screens.CharacterEditScreen
 import com.kstoya.univer.ui.screens.GameHost
 import com.kstoya.univer.ui.screens.HomeScreen
 import com.kstoya.univer.ui.screens.LibraryScreen
 import com.kstoya.univer.ui.screens.OnboardingScreen
 import com.kstoya.univer.ui.screens.OnlineScreen
 import com.kstoya.univer.ui.screens.PlaceholderScreen
+import com.kstoya.univer.ui.screens.RulesScreen
 import com.kstoya.univer.ui.screens.SettingsScreen
 import com.kstoya.univer.ui.screens.SetupScreen
 
@@ -51,9 +49,11 @@ fun AppNav(vm: AppViewModel) {
                 onLocal = { nav.navigate("setup") },
                 onOnline = { nav.navigate("online") },
                 onLibrary = { nav.navigate("library") },
-                onSettings = { nav.navigate("settings") }
+                onSettings = { nav.navigate("settings") },
+                onRules = { nav.navigate("rules") }
             )
         }
+        composable("rules") { RulesScreen(onBack = { nav.popBackStack() }) }
         composable("setup") {
             val chars by vm.characters.collectAsState()
             val settings by vm.settings.collectAsState()
@@ -65,13 +65,13 @@ fun AppNav(vm: AppViewModel) {
                 presetNames = { vm.presetNameList(it) },
                 onBack = { nav.popBackStack() },
                 onSavePreset = { title, names -> vm.savePreset(title, names) },
-                onStart = { names, showMs, alt, mark, filter ->
+                onStart = { names, showMs, filter ->
                     vm.playClick()
-                    if (vm.startLocal(names, showMs, alt, mark, filter)) {
+                    if (vm.startLocal(names, showMs, filter)) {
                         nav.navigate("game") { popUpTo("home") }
                     }
                 },
-                onAddCharacters = { nav.navigate("library") }
+                onRules = { nav.navigate("rules") }
             )
         }
         composable("game") {
@@ -85,23 +85,9 @@ fun AppNav(vm: AppViewModel) {
             LibraryScreen(
                 characters = chars,
                 onBack = { nav.popBackStack() },
-                onAdd = { nav.navigate("edit?id=") },
-                onEdit = { nav.navigate("edit?id=${it.id}") },
-                onDeleted = { vm.deleteCharacter(it) },
-                onDuplicate = { vm.duplicateCharacter(it) },
                 onExport = { list, title -> vm.exportFile(list, title) },
                 onImport = { uri, onPreview -> vm.importPreview(uri, onPreview) },
-                onApplyImport = { preview, policy, done -> vm.applyImport(preview, policy, done) },
-                onPlay = { nav.navigate("setup") }
-            )
-        }
-        composable("edit?id={id}", arguments = listOf(navArgument("id") { type = NavType.StringType; defaultValue = "" })) { entry ->
-            val id = entry.arguments?.getString("id").orEmpty()
-            CharacterEditScreen(
-                characterId = id,
-                onBack = { nav.popBackStack() },
-                onOpenLibrary = { nav.popBackStack() },
-                vm = vm
+                onApplyImport = { preview, policy, done -> vm.applyImport(preview, policy, done) }
             )
         }
         composable("settings") {
@@ -112,8 +98,6 @@ fun AppNav(vm: AppViewModel) {
                 language = vm.language(),
                 onBack = { nav.popBackStack() },
                 onShowMs = { vm.setShowMs(it) },
-                onAlternate = { vm.setAlternate(it) },
-                onMarkAfter = { vm.setMarkAfter(it) },
                 onSound = { vm.setSound(it) },
                 onVibrate = { vm.setVibrate(it) },
                 onTapHide = { vm.setTapHide(it) },

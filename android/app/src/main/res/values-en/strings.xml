@@ -5,7 +5,7 @@
     <string name="home_local">Play on one phone</string>
     <string name="home_online">Online, everyone has a phone</string>
     <string name="home_library">Characters (%1$d)</string>
-    <string name="home_hint">Phone on your forehead, others give hints</string>
+    <string name="home_hint">You ask, the others answer yes or no</string>
     <string name="home_settings">Settings</string>
     <string name="home_offline">Local mode works without internet</string>
     <string name="home_need_chars">You need at least 2 characters</string>
@@ -44,7 +44,7 @@
     <string name="setup_deck_choose">Deck</string>
 
     <string name="pass_title">%1$s, you are up</string>
-    <string name="pass_body">Take the phone, turn the screen to the others and put it on your forehead</string>
+    <string name="pass_body">Take the phone and turn the screen to the others. You must not see your character.</string>
     <string name="pass_ready">Ready</string>
     <string name="pass_progress">Player %1$d of %2$d</string>
     <string name="countdown_go">Go!</string>
@@ -286,4 +286,20 @@
     <string name="onboarding_3_title_new">Friends’ voices</string>
     <string name="onboarding_3_body_new">The countdown, “Nice one!” and “Missed” are voiced by your crew — already built in.</string>
     <string name="ph_voice_bank">Voices: %1$d files in the bank</string>
+    <string name="rules_title">How to play</string>
+    <string name="rules_step_1">1. You get a character. You cannot see it — the others hold the phone.</string>
+    <string name="rules_step_2">2. When everyone has seen their character, take turns asking questions about yours.</string>
+    <string name="rules_step_3">3. Ask yes/no questions. A “yes” lets you ask again. A “no” passes the turn to the next player.</string>
+    <string name="rules_step_4">4. Guess who you are and you win. Everything else happens in real life: the phone only shows cards.</string>
+    <string name="rules_button">Got it</string>
+    <string name="rules_link">How to play</string>
+    <string name="reshow_for">Card of “%1$s”</string>
+    <string name="report_telegram">Report to Telegram</string>
+    <string name="report_title">Who Am I: Campus — who was who</string>
+    <string name="onboarding_2_button">See characters</string>
+    <string name="onboarding_1_body_new">You get a character you cannot see. Ask questions, the others answer yes or no — that is how you find out who you are.</string>
+    <string name="onboarding_2_body_new">Cards of your friends and professors are already inside. Pick the lineup and go.</string>
+    <string name="pass_body_new">Take the phone and turn the screen to the others. You must not see your own character.</string>
+    <string name="show_hint_new">Ask: “Am I a professor?” The others answer yes or no.</string>
+    <string name="online_waiting_reveal">Waiting for the host to reveal the cards</string>
 </resources>

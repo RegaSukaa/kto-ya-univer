@@ -21,6 +21,28 @@ object Share {
         ctx.startActivity(Intent.createChooser(send, subject).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
     }
 
+    /** Отчёт в Telegram: сначала пробуем открыть сам мессенджер, иначе — обычный выбор приложения. */
+    fun telegram(ctx: Context, text: String, subject: String) {
+        val packages = listOf(
+            "org.telegram.messenger",
+            "org.telegram.messenger.web",
+            "org.telegram.plus",
+            "org.thunderdog.challegram",
+            "com.ayugram.messenger"
+        )
+        for (pkg in packages) {
+            val intent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, text)
+                putExtra(Intent.EXTRA_SUBJECT, subject)
+                setPackage(pkg)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            if (runCatching { ctx.startActivity(intent); true }.getOrDefault(false)) return
+        }
+        text(ctx, text, subject)
+    }
+
     fun text(ctx: Context, text: String, subject: String) {
         val send = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"

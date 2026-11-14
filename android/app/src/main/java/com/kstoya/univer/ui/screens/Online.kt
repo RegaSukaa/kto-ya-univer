@@ -115,7 +115,7 @@ fun OnlineScreen(
         s.phase == "closed" -> OnlineEnded(s, onBack, vm, server, name)
         s.displayPhase == "lobby" -> OnlineLobby(s, vm, onBack, settings)
         s.displayPhase == "countdown" -> {
-            KeepBright()
+            KeepScreenOn()
             Box(Modifier.fillMaxSize().background(Color(0xFF2B2109))) {
                 CountdownNumber(s.countdownDigit, stringResource(R.string.countdown_go), Modifier.fillMaxSize())
                 Text(
@@ -125,7 +125,7 @@ fun OnlineScreen(
                 )
             }
         }
-        s.displayPhase == "show" || s.displayPhase == "mark" -> OnlineGame(s, vm)
+        s.displayPhase == "show" || s.displayPhase == "done" -> OnlineGame(s, vm)
         s.phase == "reveal" -> OnlineReveal(s, vm, onBack)
         else -> OnlineLobby(s, vm, onBack, settings)
     }
@@ -327,7 +327,7 @@ private fun OnlineLobby(state: OnlineUiState, vm: OnlineViewModel, onBack: () ->
 
 @Composable
 private fun OnlineGame(state: OnlineUiState, vm: OnlineViewModel) {
-    KeepBright()
+    KeepScreenOn()
     val card = state.myCharacter?.toCardModel(state.myPhotoIndex)
     val remaining = state.showRemainingMs
     val seconds = ceil(remaining / 1000.0).toInt()
@@ -358,30 +358,15 @@ private fun OnlineGame(state: OnlineUiState, vm: OnlineViewModel) {
                 ProgressRing(fraction = if (state.showMs > 0) remaining.toFloat() / (COUNTDOWN_MS + state.showMs) else 0f, seconds = seconds, diameter = 64.dp)
             }
         }
-        if (state.displayPhase == "mark") {
+        if (state.displayPhase == "done") {
             Column(
                 Modifier.align(Alignment.BottomCenter).fillMaxWidth().background(Color.Black.copy(alpha = 0.85f)).padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(stringResource(R.string.mark_title), color = Color.White, fontSize = 20.sp)
+                Text(stringResource(R.string.online_waiting_reveal), color = Color.White, fontSize = 16.sp)
                 Spacer(Modifier.height(8.dp))
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Box(Modifier.weight(1f)) {
-                        BigButton(stringResource(R.string.online_guess_yes), onClick = {
-                            vm.sendResult("guessed"); vm.revealIfHost()
-                        })
-                    }
-                    Box(Modifier.weight(1f)) {
-                        BigButton(stringResource(R.string.online_guess_no), onClick = {
-                            vm.sendResult("missed"); vm.revealIfHost()
-                        }, primary = false)
-                    }
-                }
                 if (state.host) {
-                    Spacer(Modifier.height(8.dp))
-                    TextButton(onClick = { vm.revealAll() }) {
-                        Text(stringResource(R.string.online_reveal_btn), color = MaterialTheme.colorScheme.primary)
-                    }
+                    BigButton(stringResource(R.string.online_reveal_btn), onClick = { vm.revealAll() })
                 }
             }
         }

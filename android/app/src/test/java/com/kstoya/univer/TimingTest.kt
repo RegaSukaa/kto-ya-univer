@@ -4,17 +4,18 @@ import com.kstoya.univer.game.LocalGameEngine
 import com.kstoya.univer.game.LocalPhase
 import com.kstoya.univer.game.PlayerSlot
 import com.kstoya.univer.game.RoundInfo
+import com.kstoya.univer.game.digitFor
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class TimingTest {
-    private fun engine(players: Int = 2, showMs: Int = 10_000, markAfter: Boolean = false): LocalGameEngine {
+    private fun engine(players: Int = 2, showMs: Int = 10_000): LocalGameEngine {
         val rounds = (0 until players).map {
             RoundInfo("p$it", "Игрок $it", "c$it", "Персонаж $it")
         }
-        val e = LocalGameEngine(rounds.map { PlayerSlot(it.playerId, it.playerName) }, rounds, showMs, markAfter)
+        val e = LocalGameEngine(rounds.map { PlayerSlot(it.playerId, it.playerName) }, rounds, showMs)
         e.start(0)
         return e
     }
@@ -60,35 +61,12 @@ class TimingTest {
     }
 
     @Test
-    fun `marking is required when markAfter is on`() {
-        val e = engine(markAfter = true)
-        e.ready(0)
-        e.tick(12_800)
-        assertEquals(LocalPhase.MARK, e.phase)
-        e.mark(13_000, "guessed")
-        assertEquals(LocalPhase.PASS, e.phase)
-        assertEquals(1, e.index)
-        assertEquals("guessed", e.results["p0"])
-    }
-
-    @Test
-    fun `last round goes to review`() {
+    fun `after last card the game goes to review`() {
         val e = engine(players = 1)
         e.ready(0)
         e.tick(12_800)
         assertTrue(e.finished)
         assertEquals(LocalPhase.REVIEW, e.phase)
-        assertFalse(e.phase == LocalPhase.PASS)
-    }
-
-    @Test
-    fun `skipping marks skipped and advances`() {
-        val e = engine(players = 2, markAfter = true)
-        e.ready(0)
-        e.tick(12_800)
-        e.skipRound(12_900)
-        assertEquals("skipped", e.results["p0"])
-        assertEquals(1, e.index)
     }
 
     @Test
@@ -98,5 +76,14 @@ class TimingTest {
         e.cancel(1_000)
         assertEquals(LocalPhase.PASS, e.phase)
         assertEquals(0, e.index)
+    }
+
+    @Test
+    fun `reshow countdown uses the same 3-2-1 cadence`() {
+        assertEquals(3, digitFor(0))
+        assertEquals(2, digitFor(800))
+        assertEquals(1, digitFor(1_600))
+        assertEquals(0, digitFor(2_400))
+        assertFalse(digitFor(2_800) == 3)
     }
 }

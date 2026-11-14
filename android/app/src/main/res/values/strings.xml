@@ -6,7 +6,7 @@
     <string name="home_local">Играть на одном телефоне</string>
     <string name="home_online">Онлайн, у каждого свой телефон</string>
     <string name="home_library">Персонажи (%1$d)</string>
-    <string name="home_hint">Телефон ко лбу, остальные подсказывают</string>
+    <string name="home_hint">Ты задаёшь вопросы — остальные отвечают «да» или «нет»</string>
     <string name="home_settings">Настройки</string>
     <string name="home_offline">Локальный режим работает без интернета</string>
     <string name="home_need_chars">Нужно минимум 2 персонажа</string>
@@ -48,7 +48,7 @@
 
     <!-- S3a/S3b -->
     <string name="pass_title">%1$s, твой выход</string>
-    <string name="pass_body">Возьми телефон, поверни экран к остальным и приложи ко лбу</string>
+    <string name="pass_body">Возьми телефон, поверни экран к остальным. Свой персонаж тебе видеть нельзя.</string>
     <string name="pass_ready">Готово</string>
     <string name="pass_progress">Игрок %1$d из %2$d</string>
     <string name="countdown_go">Погнали!</string>
@@ -302,4 +302,20 @@
     <string name="onboarding_3_title_new">Голоса друзей</string>
     <string name="onboarding_3_body_new">Отсчёт, «Красавчик!» и «Эх, не угадал» звучат голосами вашей компании — они уже внутри.</string>
     <string name="ph_voice_bank">Голоса: %1$d файлов в банке</string>
+    <string name="rules_title">Как играть</string>
+    <string name="rules_step_1">1. Тебе выпадает персонаж. Ты его не видишь — телефон держат остальные.</string>
+    <string name="rules_step_2">2. Когда все посмотрели своих персонажей, вы по очереди задаёте вопросы про своего.</string>
+    <string name="rules_step_3">3. Вопросы в основном такие, где отвечают «да» или «нет». Ответили «да» — спрашиваешь дальше. Ответили «нет» — спрашивает следующий.</string>
+    <string name="rules_step_4">4. Угадал, кто ты, — победа. Всё остальное происходит вживую: телефон нужен только для карточек.</string>
+    <string name="rules_button">Понятно</string>
+    <string name="rules_link">Как играть</string>
+    <string name="reshow_for">Карточка игрока «%1$s»</string>
+    <string name="report_telegram">Отчёт в Telegram</string>
+    <string name="report_title">Кто Я: Универ — кто кем был</string>
+    <string name="onboarding_2_button">Посмотреть персонажей</string>
+    <string name="onboarding_1_body_new">Тебе выпадает персонаж, ты его не видишь. Задаёшь вопросы, остальные отвечают «да» или «нет» — так и узнаёшь, кто ты.</string>
+    <string name="onboarding_2_body_new">Карточки друзей и преподов уже внутри. Выбирай состав — и по кругу.</string>
+    <string name="pass_body_new">Возьми телефон и поверни экран к остальным. Свой персонаж тебе видеть нельзя.</string>
+    <string name="show_hint_new">Спрашивай: «Я препод?» Остальные отвечают «да» или «нет».</string>
+    <string name="online_waiting_reveal">Ждём хоста — он раскроет карточки</string>
 </resources>

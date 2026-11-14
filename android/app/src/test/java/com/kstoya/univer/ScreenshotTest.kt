@@ -13,12 +13,10 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.unit.dp
 import com.kstoya.univer.data.CharacterEntity
 import com.kstoya.univer.game.RoundInfo
-import com.kstoya.univer.game.SummaryStats
 import com.kstoya.univer.ui.components.CharacterCard
 import com.kstoya.univer.ui.components.toCardModel
 import com.kstoya.univer.ui.screens.HomeScreen
 import com.kstoya.univer.ui.screens.ReviewScreen
-import com.kstoya.univer.ui.screens.SummaryScreen
 import com.kstoya.univer.ui.theme.KtoYaTheme
 import org.junit.Rule
 import org.junit.Test
@@ -65,7 +63,7 @@ class ScreenshotTest {
             KtoYaTheme(dark = true) {
                 HomeScreen(
                     characters = listOf(friend, teacher),
-                    onLocal = {}, onOnline = {}, onLibrary = {}, onSettings = {}
+                    onLocal = {}, onOnline = {}, onLibrary = {}, onSettings = {}, onRules = {}
                 )
             }
         }
@@ -126,37 +124,12 @@ class ScreenshotTest {
         compose.setContent {
             KtoYaTheme(dark = true) {
                 ReviewScreen(
-                    rounds = rounds, results = results,
-                    onReshow = {}, onSetResult = { _, _ -> }, onNextRound = {}, onOpenSummary = {}, onExit = {}
+                    rounds = rounds,
+                    onReshow = {}, onNextRound = {}, onExit = {}
                 )
             }
         }
         save("s6_review")
     }
 
-    @Test
-    fun summaryScreen() {
-        val rounds = listOf(
-            RoundInfo("p0", "Рустам", "teacher_smirnov", "Доцент Смирнов"),
-            RoundInfo("p1", "Аня", "friend_ivan", "Иван Петров"),
-            RoundInfo("p2", "Дима", "friend_anya", "Аня Соколова"),
-            RoundInfo("p3", "Соня", "friend_dima", "Дима Крылов"),
-            RoundInfo("p4", "Марк", "teacher_kovalev", "Профессор Ковалёв"),
-            RoundInfo("p5", "Тимур", "friend_lesha", "Лёша Морозов")
-        )
-        val chars = listOf(friend, teacher).associateBy { it.id }
-        compose.setContent {
-            KtoYaTheme(dark = true) {
-                SummaryScreen(
-                    rounds = rounds,
-                    results = mapOf("p0" to "guessed", "p1" to "missed", "p2" to "guessed", "p3" to "guessed", "p4" to "missed", "p5" to "guessed"),
-                    stats = SummaryStats(4, 6, listOf("Тимур"), 3, 4, 1, 2, 10),
-                    scored = true,
-                    onShowCharacter = {},
-                    onNextRound = {}, onExit = {}
-                )
-            }
-        }
-        save("s8_summary")
-    }
 }

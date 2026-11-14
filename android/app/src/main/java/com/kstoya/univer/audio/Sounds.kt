@@ -13,7 +13,7 @@ import com.kstoya.univer.data.Settings
  */
 class Sounds(private val ctx: Context) {
     companion object {
-        val VOICE_SLOTS = listOf("go", "guessed", "missed", "final")
+        val VOICE_SLOTS = listOf("go", "final")
     }
 
     private val pool: SoundPool = SoundPool.Builder()
@@ -55,9 +55,6 @@ class Sounds(private val ctx: Context) {
         runCatching { pool.play(id, volume, volume, 1, 0, 1f) }
     }
 
-    fun hasPersonal(characterId: String, slot: String): Boolean =
-        assetSounds.contains("${characterId}_$slot.m4a")
-
     fun hasBank(slot: String): Boolean = bank[slot]?.isNotEmpty() == true
 
     /** Случайная реплика из банка, с защитой от повтора подряд. */
@@ -70,29 +67,11 @@ class Sounds(private val ctx: Context) {
         return playAsset("voices/$slot/$pick", volume)
     }
 
-    /**
-     * Реплика: личный голос персонажа (assets/sounds/<id>_win.m4a) →
-     * случайный голос из банка (assets/voices/<slot>/) → встроенный WAV.
-     */
-    fun playVoice(characterId: String?, slot: String, settings: Settings) {
+    /** Случайный голос из банка, иначе встроенный WAV. Тишины нет. */
+    fun playVoice(slot: String, settings: Settings) {
         if (!settings.sound || streamVolume() <= 0) return
-        val personal = when (slot) {
-            "guessed" -> "win"
-            "missed" -> "skip"
-            else -> null
-        }
-        if (characterId != null && personal != null) {
-            val name = "${characterId}_$personal.m4a"
-            if (assetSounds.contains(name) && playAsset("sounds/$name", settings.voiceVolume)) return
-        }
         if (playBank(slot, settings.voiceVolume)) return
-        val fallback = when (slot) {
-            "go" -> "go"
-            "guessed" -> "win"
-            "missed" -> "skip"
-            "final" -> "fanfare"
-            else -> "win"
-        }
+        val fallback = if (slot == "go") "go" else "fanfare"
         play(fallback, settings.voiceVolume, settings)
     }
 

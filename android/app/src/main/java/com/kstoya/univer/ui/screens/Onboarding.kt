@@ -55,7 +55,7 @@ fun OnboardingScreen(onDone: (goLibrary: Boolean) -> Unit) {
         )
         Spacer(Modifier.height(16.dp))
         Text(
-            text = stringResource(if (page == 0) R.string.onboarding_1_body else R.string.onboarding_2_body),
+            text = stringResource(if (page == 0) R.string.onboarding_1_body_new else R.string.onboarding_2_body_new),
             fontSize = 17.sp,
             lineHeight = 25.sp,
             textAlign = TextAlign.Center,
@@ -79,7 +79,7 @@ fun OnboardingScreen(onDone: (goLibrary: Boolean) -> Unit) {
         } else {
             BigButton(stringResource(R.string.onboarding_play_placeholder), onClick = { onDone(false) })
             Spacer(Modifier.height(8.dp))
-            BigButton(stringResource(R.string.onboarding_add_chars), onClick = { onDone(true) }, primary = false)
+            BigButton(stringResource(R.string.onboarding_2_button), onClick = { onDone(true) }, primary = false)
         }
     }
 }
