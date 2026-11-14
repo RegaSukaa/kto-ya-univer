@@ -300,4 +300,9 @@
     <string name="pass_body_new">Take the phone and turn the screen to the others. You must not see your own character.</string>
     <string name="show_hint_new">Ask: “Am I a professor?” The others answer yes or no.</string>
     <string name="online_waiting_reveal">Waiting for the host to reveal the cards</string>
+    <string name="online_check">Check server</string>
+    <string name="online_check_ok">Server responds</string>
+    <string name="online_check_fail">Server does not respond</string>
+    <string name="online_server_hint">Run start-server.bat on the PC. The phone and the PC must be on the same Wi-Fi.</string>
+    <string name="err_server_unreachable">Cannot connect to %1$s. Start the server on the PC (start-server.bat) and check the address.</string>
 </resources>

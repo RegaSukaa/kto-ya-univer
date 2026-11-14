@@ -83,6 +83,7 @@ fun OnlineScreen(
     var name by remember { mutableStateOf("") }
     var code by remember { mutableStateOf("") }
     var server by remember { mutableStateOf(settings.serverUrl) }
+    var serverCheck by remember { mutableStateOf<Boolean?>(null) }
 
     LaunchedEffect(characters, settings.serverUrl) {
         vm.attach(settings.serverUrl, characters)
@@ -110,7 +111,12 @@ fun OnlineScreen(
                 vm.joinRoom(code, name, server)
             },
             onResume = { vm.resumeSession() },
-            onDismissSaved = { vm.dismissSaved() }
+            onDismissSaved = { vm.dismissSaved() },
+            checkResult = serverCheck,
+            onCheck = {
+                serverCheck = null
+                vm.checkServer(server) { serverCheck = it }
+            }
         )
         s.phase == "closed" -> OnlineEnded(s, onBack, vm, server, name)
         s.displayPhase == "lobby" -> OnlineLobby(s, vm, onBack, settings)
@@ -150,7 +156,9 @@ private fun OnlineEntry(
     onCreate: () -> Unit,
     onJoin: () -> Unit,
     onResume: () -> Unit,
-    onDismissSaved: () -> Unit
+    onDismissSaved: () -> Unit,
+    checkResult: Boolean?,
+    onCheck: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -236,9 +244,24 @@ private fun OnlineEntry(
             TextButton(onClick = { onServer(com.kstoya.univer.BuildConfig.SERVER_URL) }) {
                 Text(stringResource(R.string.online_server_reset))
             }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                TextButton(onClick = onCheck) { Text(stringResource(R.string.online_check)) }
+                if (checkResult != null) {
+                    Text(
+                        text = stringResource(if (checkResult) R.string.online_check_ok else R.string.online_check_fail),
+                        color = if (checkResult) Color(0xFF22C55E) else MaterialTheme.colorScheme.error,
+                        fontSize = 13.sp
+                    )
+                }
+            }
+            Text(
+                stringResource(R.string.online_server_hint),
+                fontSize = 12.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
             state.errorCode?.let {
                 Spacer(Modifier.height(12.dp))
-                Text(errorText(it), color = MaterialTheme.colorScheme.error, fontSize = 14.sp)
+                Text(errorText(it, server), color = MaterialTheme.colorScheme.error, fontSize = 14.sp)
             }
             Spacer(Modifier.height(24.dp))
         }
@@ -445,13 +468,13 @@ private fun OnlineEnded(state: OnlineUiState, onBack: () -> Unit, vm: OnlineView
 }
 
 @Composable
-private fun errorText(code: String): String = when (code) {
+private fun errorText(code: String, server: String): String = when (code) {
     "ROOM_NOT_FOUND" -> stringResource(R.string.err_room_not_found)
     "ROOM_FULL" -> stringResource(R.string.err_room_full)
     "NAME_TAKEN" -> stringResource(R.string.err_name_taken)
     "ALREADY_STARTED" -> stringResource(R.string.err_already_started)
     "NOT_HOST" -> stringResource(R.string.err_not_host)
     "BAD_VERSION" -> stringResource(R.string.err_bad_version)
-    "ROOM_CLOSED" -> stringResource(R.string.err_offline)
+    "ROOM_CLOSED" -> stringResource(R.string.err_server_unreachable, server)
     else -> stringResource(R.string.err_generic)
 }

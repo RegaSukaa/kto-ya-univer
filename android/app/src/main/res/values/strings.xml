@@ -316,4 +316,9 @@
     <string name="pass_body_new">Возьми телефон и поверни экран к остальным. Свой персонаж тебе видеть нельзя.</string>
     <string name="show_hint_new">Спрашивай: «Я препод?» Остальные отвечают «да» или «нет».</string>
     <string name="online_waiting_reveal">Ждём хоста — он раскроет карточки</string>
+    <string name="online_check">Проверить сервер</string>
+    <string name="online_check_ok">Сервер отвечает</string>
+    <string name="online_check_fail">Сервер не отвечает</string>
+    <string name="online_server_hint">На ПК запусти start-server.bat. Телефон и ПК должны быть в одной Wi-Fi.</string>
+    <string name="err_server_unreachable">Не удалось подключиться к %1$s. Запусти сервер на ПК (start-server.bat) и проверь адрес.</string>
 </resources>

@@ -10,6 +10,7 @@ import com.kstoya.univer.game.Deck
 import com.kstoya.univer.game.DeckFilter
 import com.kstoya.univer.game.online.ConnStatus
 import com.kstoya.univer.game.online.OnlineClient
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,6 +19,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import java.util.concurrent.TimeUnit
 import org.json.JSONObject
 
 data class OmPlayer(val id: String, val name: String, val ready: Boolean, val online: Boolean)
@@ -141,6 +146,36 @@ class OnlineViewModel(app: Application) : AndroidViewModel(app) {
         client.send(JSONObject().put("type", "hello").put("proto", 1).put("clientId", "android").put("appVersion", BuildConfig.VERSION_NAME).put("lang", "ru"))
         pending?.invoke()
         pending = null
+    }
+
+    /** Быстрая проверка: GET /health на том же хосте, что и ws. */
+    fun checkServer(url: String, onResult: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            val ok = withContext(Dispatchers.IO) {
+                runCatching {
+                    val client = OkHttpClient.Builder()
+                        .connectTimeout(4, TimeUnit.SECONDS)
+                        .readTimeout(4, TimeUnit.SECONDS)
+                        .build()
+                    client.newCall(Request.Builder().url(healthUrl(url)).build()).execute().use { r ->
+                        r.isSuccessful && (r.body?.string() ?: "").contains("\"ok\":true")
+                    }
+                }.getOrDefault(false)
+            }
+            onResult(ok)
+        }
+    }
+
+    private fun healthUrl(raw: String): String {
+        var s = raw.trim().ifBlank { BuildConfig.SERVER_URL }
+        s = when {
+            s.startsWith("wss://") -> "https://" + s.removePrefix("wss://")
+            s.startsWith("ws://") -> "http://" + s.removePrefix("ws://")
+            s.startsWith("http://") || s.startsWith("https://") -> s
+            else -> "http://$s"
+        }
+        s = s.removeSuffix("/").removeSuffix("/ws").trimEnd('/')
+        return "$s/health"
     }
 
     fun createRoom(name: String, url: String, showHint: Boolean = false) {

@@ -14,9 +14,9 @@ android {
         applicationId = "com.kstoya.univer"
         minSdk = 26
         targetSdk = 35
-        versionCode = 8
-        versionName = "1.7"
-        buildConfigField("String", "SERVER_URL", "\"ws://10.0.2.2:8080/ws\"")
+        versionCode = 9
+        versionName = "1.8"
+        buildConfigField("String", "SERVER_URL", "\"ws://192.168.1.163:8080/ws\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
