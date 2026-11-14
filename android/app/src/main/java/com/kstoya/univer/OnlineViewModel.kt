@@ -154,8 +154,8 @@ class OnlineViewModel(app: Application) : AndroidViewModel(app) {
             val ok = withContext(Dispatchers.IO) {
                 runCatching {
                     val client = OkHttpClient.Builder()
-                        .connectTimeout(4, TimeUnit.SECONDS)
-                        .readTimeout(4, TimeUnit.SECONDS)
+                        .connectTimeout(15, TimeUnit.SECONDS)
+                        .readTimeout(15, TimeUnit.SECONDS)
                         .build()
                     client.newCall(Request.Builder().url(healthUrl(url)).build()).execute().use { r ->
                         r.isSuccessful && (r.body?.string() ?: "").contains("\"ok\":true")

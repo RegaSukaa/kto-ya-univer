@@ -14,7 +14,7 @@ enum class ConnStatus { IDLE, CONNECTING, CONNECTED, FAILED, CLOSED }
 
 class OnlineClient {
     private val http = OkHttpClient.Builder()
-        .connectTimeout(45, TimeUnit.SECONDS)
+        .connectTimeout(90, TimeUnit.SECONDS)
         .readTimeout(0, TimeUnit.MILLISECONDS)
         .pingInterval(20, TimeUnit.SECONDS)
         .build()
