@@ -102,9 +102,7 @@
    ],
    "photo": "characters/friend_burenkov_matvey_gr_2212/photo_1.webp",
    "photos": [
-    "characters/friend_burenkov_matvey_gr_2212/photo_1.webp",
-    "characters/friend_burenkov_matvey_gr_2212/photo_2.webp",
-    "characters/friend_burenkov_matvey_gr_2212/photo_3.webp"
+    "characters/friend_burenkov_matvey_gr_2212/photo_1.webp"
    ],
    "sounds": {
     "win": null,
@@ -608,7 +606,10 @@
     "characters/friend_rustam_gr_2212/photo_4.webp",
     "characters/friend_rustam_gr_2212/photo_5.webp",
     "characters/friend_rustam_gr_2212/photo_6.webp",
-    "characters/friend_rustam_gr_2212/photo_7.webp"
+    "characters/friend_rustam_gr_2212/photo_7.webp",
+    "characters/friend_rustam_gr_2212/photo_8.webp",
+    "characters/friend_rustam_gr_2212/photo_9.webp",
+    "characters/friend_rustam_gr_2212/photo_10.webp"
    ],
    "sounds": {
     "win": null,
