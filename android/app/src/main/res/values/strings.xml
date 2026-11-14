@@ -192,7 +192,7 @@
     <string name="settings_sound_block">Звук и вибрация</string>
     <string name="settings_sound">Звук</string>
     <string name="settings_vibrate">Вибрация</string>
-    <string name="settings_voice_volume">Громкость реплик</string>
+    <string name="settings_voice_volume">Громкость голосов (старт и финал)</string>
     <string name="settings_voice">Голос группы</string>
     <string name="settings_data">Данные</string>
     <string name="settings_export">Экспортировать набор</string>

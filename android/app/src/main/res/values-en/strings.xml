@@ -181,7 +181,7 @@
     <string name="settings_sound_block">Sound and vibration</string>
     <string name="settings_sound">Sound</string>
     <string name="settings_vibrate">Vibration</string>
-    <string name="settings_voice_volume">Voice volume</string>
+    <string name="settings_voice_volume">Voice volume (start and final)</string>
     <string name="settings_voice">Group voice</string>
     <string name="settings_data">Data</string>
     <string name="settings_export">Export set</string>

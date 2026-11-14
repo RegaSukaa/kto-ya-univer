@@ -226,9 +226,12 @@ class Repo(
         return bankJson.decodeFromString(AssetManifest.serializer(), text)
     }
 
-    /** Наполняет пустую базу банком. force=true — перечитывает assets, не трогая правки пользователя. */
+    /**
+     * Синхронизирует банк из assets: добавляет новых, обновляет существующих,
+     * удаляет старые assets-персонажи, которых больше нет в manifest (например, заглушки).
+     * Пользовательские (.ktya) записи не трогает.
+     */
     suspend fun seedFromAssets(force: Boolean = false): Int = withContext(Dispatchers.IO) {
-        if (!force && db.characterDao().count() > 0) return@withContext db.characterDao().count()
         val manifest = runCatching { readManifest() }.getOrNull() ?: return@withContext 0
         val existing = db.characterDao().all().associateBy { it.id }
         val now = System.currentTimeMillis()
@@ -257,6 +260,10 @@ class Repo(
             )
         }
         db.characterDao().upsertAll(rows)
+        val incoming = manifest.characters.map { it.id }.toSet()
+        existing.values
+            .filter { it.source == "assets" && it.id !in incoming }
+            .forEach { db.characterDao().delete(it.id) }
         db.characterDao().count()
     }
 

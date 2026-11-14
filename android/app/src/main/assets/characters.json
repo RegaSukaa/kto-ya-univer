@@ -3,206 +3,1113 @@
  "version": 1,
  "characters": [
   {
-   "id": "friend_ivan",
-   "name": "Иван Петров",
+   "id": "friend_adelya_kurator_studsovet",
+   "name": "Аделя",
    "kind": "friend",
    "bgPreset": 0,
-   "initials": "ИП",
+   "initials": "А",
    "tags": [
-    "Группа ИТ-21",
-    "любитель поспать на парах"
+    "Куратор, студсовет"
    ],
-   "photo": "characters/friend_ivan.png",
+   "photo": "characters/friend_adelya_kurator_studsovet/photo_1.webp",
+   "photos": [
+    "characters/friend_adelya_kurator_studsovet/photo_1.webp",
+    "characters/friend_adelya_kurator_studsovet/photo_2.webp"
+   ],
    "sounds": {
     "win": null,
     "skip": null
    },
-   "placeholder": true
+   "placeholder": false
   },
   {
-   "id": "friend_anya",
-   "name": "Аня Соколова",
-   "kind": "friend",
-   "bgPreset": 3,
-   "initials": "АС",
-   "tags": [
-    "Староста",
-    "знает всё раньше препода"
-   ],
-   "photo": "characters/friend_anya.png",
-   "sounds": {
-    "win": null,
-    "skip": null
-   },
-   "placeholder": true
-  },
-  {
-   "id": "friend_dima",
-   "name": "Дима Крылов",
-   "kind": "friend",
-   "bgPreset": 4,
-   "initials": "ДК",
-   "tags": [
-    "Вечно с энергетиком",
-    "прогулял 3 пары из 4"
-   ],
-   "photo": "characters/friend_dima.png",
-   "sounds": {
-    "win": null,
-    "skip": null
-   },
-   "placeholder": true
-  },
-  {
-   "id": "friend_lesha",
-   "name": "Лёша Морозов",
-   "kind": "friend",
-   "bgPreset": 2,
-   "initials": "ЛМ",
-   "tags": [
-    "Спит на первой парте",
-    "мастер мемов"
-   ],
-   "photo": "characters/friend_lesha.png",
-   "sounds": {
-    "win": null,
-    "skip": null
-   },
-   "placeholder": true
-  },
-  {
-   "id": "friend_nastya",
-   "name": "Настя Волкова",
-   "kind": "friend",
-   "bgPreset": 1,
-   "initials": "НВ",
-   "tags": [
-    "Конспекты как печатные",
-    "ни разу не сдала в срок"
-   ],
-   "photo": "characters/friend_nastya.png",
-   "sounds": {
-    "win": null,
-    "skip": null
-   },
-   "placeholder": true
-  },
-  {
-   "id": "friend_mark",
-   "name": "Марк Хайруллин",
-   "kind": "friend",
-   "bgPreset": 5,
-   "initials": "МХ",
-   "tags": [
-    "Ходит на физру только за зачёткой"
-   ],
-   "photo": "characters/friend_mark.png",
-   "sounds": {
-    "win": null,
-    "skip": null
-   },
-   "placeholder": true
-  },
-  {
-   "id": "friend_sonya",
-   "name": "Соня Гараева",
-   "kind": "friend",
-   "bgPreset": 3,
-   "initials": "СГ",
-   "tags": [
-    "Приносит кофе всей группе",
-    "вечно опаздывает"
-   ],
-   "photo": "characters/friend_sonya.png",
-   "sounds": {
-    "win": null,
-    "skip": null
-   },
-   "placeholder": true
-  },
-  {
-   "id": "friend_timur",
-   "name": "Тимур Валиев",
+   "id": "friend_amir_almazovich_gr_2212",
+   "name": "Амир Алмазович",
    "kind": "friend",
    "bgPreset": 0,
-   "initials": "ТВ",
-   "tags": [
-    "Знает все ответы, но молчит"
-   ],
-   "photo": "characters/friend_timur.png",
-   "sounds": {
-    "win": null,
-    "skip": null
-   },
-   "placeholder": true
-  },
-  {
-   "id": "teacher_smirnov",
-   "name": "Доцент Смирнов",
-   "kind": "teacher",
-   "bgPreset": 1,
-   "initials": "ДС",
-   "tags": [
-    "Кафедра матана",
-    "строгий"
-   ],
-   "photo": "characters/teacher_smirnov.png",
-   "sounds": {
-    "win": null,
-    "skip": null
-   },
-   "placeholder": true
-  },
-  {
-   "id": "teacher_kovalev",
-   "name": "Профессор Ковалёв",
-   "kind": "teacher",
-   "bgPreset": 5,
-   "initials": "ПК",
-   "tags": [
-    "Лекции по 3 часа",
-    "спрашивает «а что это было?»"
-   ],
-   "photo": "characters/teacher_kovalev.png",
-   "sounds": {
-    "win": null,
-    "skip": null
-   },
-   "placeholder": true
-  },
-  {
-   "id": "teacher_nigmatullina",
-   "name": "Ст. преп. Нигматуллина",
-   "kind": "teacher",
-   "bgPreset": 2,
-   "initials": "СН",
-   "tags": [
-    "Ведёт лабы",
-    "ставит зачёт по списку"
-   ],
-   "photo": "characters/teacher_nigmatullina.png",
-   "sounds": {
-    "win": null,
-    "skip": null
-   },
-   "placeholder": true
-  },
-  {
-   "id": "teacher_akhmetov",
-   "name": "Ассистент Ахметов",
-   "kind": "teacher",
-   "bgPreset": 4,
    "initials": "АА",
    "tags": [
-    "Приходит в 8:00",
-    "не любит опоздавших"
+    "Гр 2212"
    ],
-   "photo": "characters/teacher_akhmetov.png",
+   "photo": "characters/friend_amir_almazovich_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_amir_almazovich_gr_2212/photo_1.webp",
+    "characters/friend_amir_almazovich_gr_2212/photo_2.webp",
+    "characters/friend_amir_almazovich_gr_2212/photo_3.webp",
+    "characters/friend_amir_almazovich_gr_2212/photo_4.webp",
+    "characters/friend_amir_almazovich_gr_2212/photo_5.webp",
+    "characters/friend_amir_almazovich_gr_2212/photo_6.webp",
+    "characters/friend_amir_almazovich_gr_2212/photo_7.webp",
+    "characters/friend_amir_almazovich_gr_2212/photo_8.webp",
+    "characters/friend_amir_almazovich_gr_2212/photo_9.webp",
+    "characters/friend_amir_almazovich_gr_2212/photo_10.webp"
+   ],
    "sounds": {
     "win": null,
     "skip": null
    },
-   "placeholder": true
+   "placeholder": false
+  },
+  {
+   "id": "friend_andrey_gr_2212",
+   "name": "Андрей",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "А",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_andrey_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_andrey_gr_2212/photo_1.webp",
+    "characters/friend_andrey_gr_2212/photo_2.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_aydar_gr_2212",
+   "name": "Айдар",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "А",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_aydar_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_aydar_gr_2212/photo_1.webp",
+    "characters/friend_aydar_gr_2212/photo_2.webp",
+    "characters/friend_aydar_gr_2212/photo_3.webp",
+    "characters/friend_aydar_gr_2212/photo_4.webp",
+    "characters/friend_aydar_gr_2212/photo_5.webp",
+    "characters/friend_aydar_gr_2212/photo_6.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_burenkov_matvey_gr_2212",
+   "name": "Буренков Матвей",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "БМ",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_burenkov_matvey_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_burenkov_matvey_gr_2212/photo_1.webp",
+    "characters/friend_burenkov_matvey_gr_2212/photo_2.webp",
+    "characters/friend_burenkov_matvey_gr_2212/photo_3.webp",
+    "characters/friend_burenkov_matvey_gr_2212/photo_4.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_danila_gr_2212",
+   "name": "Данила",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "Д",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_danila_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_danila_gr_2212/photo_1.webp",
+    "characters/friend_danila_gr_2212/photo_2.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_dasha_tsyganova_byla_v_gr_2112",
+   "name": "Даша Цыганова",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "ДЦ",
+   "tags": [
+    "Была в Гр 2112"
+   ],
+   "photo": "characters/friend_dasha_tsyganova_byla_v_gr_2112/photo_1.webp",
+   "photos": [
+    "characters/friend_dasha_tsyganova_byla_v_gr_2112/photo_1.webp",
+    "characters/friend_dasha_tsyganova_byla_v_gr_2112/photo_2.webp",
+    "characters/friend_dasha_tsyganova_byla_v_gr_2112/photo_3.webp",
+    "characters/friend_dasha_tsyganova_byla_v_gr_2112/photo_4.webp",
+    "characters/friend_dasha_tsyganova_byla_v_gr_2112/photo_5.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_dasha_zam_gr_2212",
+   "name": "Даша Зам",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "ДЗ",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_dasha_zam_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_dasha_zam_gr_2212/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_denis_studsovet",
+   "name": "Денис",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "Д",
+   "tags": [
+    "Студсовет"
+   ],
+   "photo": "characters/friend_denis_studsovet/photo_1.webp",
+   "photos": [
+    "characters/friend_denis_studsovet/photo_1.webp",
+    "characters/friend_denis_studsovet/photo_2.webp",
+    "characters/friend_denis_studsovet/photo_3.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_diana_studsovet",
+   "name": "Диана",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "Д",
+   "tags": [
+    "Студсовет"
+   ],
+   "photo": "characters/friend_diana_studsovet/photo_1.webp",
+   "photos": [
+    "characters/friend_diana_studsovet/photo_1.webp",
+    "characters/friend_diana_studsovet/photo_2.webp",
+    "characters/friend_diana_studsovet/photo_3.webp",
+    "characters/friend_diana_studsovet/photo_4.webp",
+    "characters/friend_diana_studsovet/photo_5.webp",
+    "characters/friend_diana_studsovet/photo_6.webp",
+    "characters/friend_diana_studsovet/photo_7.webp",
+    "characters/friend_diana_studsovet/photo_8.webp",
+    "characters/friend_diana_studsovet/photo_9.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_divakov_ilya_gr_2212",
+   "name": "Диваков Илья",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "ДИ",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_divakov_ilya_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_divakov_ilya_gr_2212/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_egor_lukin_gr_2212",
+   "name": "Егор Лукин",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "ЕЛ",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_egor_lukin_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_egor_lukin_gr_2212/photo_1.webp",
+    "characters/friend_egor_lukin_gr_2212/photo_2.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_farida_gr_2212",
+   "name": "Фарида",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "Ф",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_farida_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_farida_gr_2212/photo_1.webp",
+    "characters/friend_farida_gr_2212/photo_2.webp",
+    "characters/friend_farida_gr_2212/photo_3.webp",
+    "characters/friend_farida_gr_2212/photo_4.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_gera_gr_2212",
+   "name": "Гера",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "Г",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_gera_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_gera_gr_2212/photo_1.webp",
+    "characters/friend_gera_gr_2212/photo_2.webp",
+    "characters/friend_gera_gr_2212/photo_3.webp",
+    "characters/friend_gera_gr_2212/photo_4.webp",
+    "characters/friend_gera_gr_2212/photo_5.webp",
+    "characters/friend_gera_gr_2212/photo_6.webp",
+    "characters/friend_gera_gr_2212/photo_7.webp",
+    "characters/friend_gera_gr_2212/photo_8.webp",
+    "characters/friend_gera_gr_2212/photo_9.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_ilyuha_gr_2212",
+   "name": "Илюха",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "И",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_ilyuha_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_ilyuha_gr_2212/photo_1.webp",
+    "characters/friend_ilyuha_gr_2212/photo_2.webp",
+    "characters/friend_ilyuha_gr_2212/photo_3.webp",
+    "characters/friend_ilyuha_gr_2212/photo_4.webp",
+    "characters/friend_ilyuha_gr_2212/photo_5.webp",
+    "characters/friend_ilyuha_gr_2212/photo_6.webp",
+    "characters/friend_ilyuha_gr_2212/photo_7.webp",
+    "characters/friend_ilyuha_gr_2212/photo_8.webp",
+    "characters/friend_ilyuha_gr_2212/photo_9.webp",
+    "characters/friend_ilyuha_gr_2212/photo_10.webp",
+    "characters/friend_ilyuha_gr_2212/photo_11.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_karim_studsovet",
+   "name": "Карим",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "К",
+   "tags": [
+    "Студсовет"
+   ],
+   "photo": "characters/friend_karim_studsovet/photo_1.webp",
+   "photos": [
+    "characters/friend_karim_studsovet/photo_1.webp",
+    "characters/friend_karim_studsovet/photo_2.webp",
+    "characters/friend_karim_studsovet/photo_3.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_katya_gr_2212",
+   "name": "Катя",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "К",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_katya_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_katya_gr_2212/photo_1.webp",
+    "characters/friend_katya_gr_2212/photo_2.webp",
+    "characters/friend_katya_gr_2212/photo_3.webp",
+    "characters/friend_katya_gr_2212/photo_4.webp",
+    "characters/friend_katya_gr_2212/photo_5.webp",
+    "characters/friend_katya_gr_2212/photo_6.webp",
+    "characters/friend_katya_gr_2212/photo_7.webp",
+    "characters/friend_katya_gr_2212/photo_8.webp",
+    "characters/friend_katya_gr_2212/photo_9.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_krutikov_matvey_byl_v_gr_2112",
+   "name": "Крутиков Матвей",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "КМ",
+   "tags": [
+    "Был в Гр 2112"
+   ],
+   "photo": "characters/friend_krutikov_matvey_byl_v_gr_2112/photo_1.webp",
+   "photos": [
+    "characters/friend_krutikov_matvey_byl_v_gr_2112/photo_1.webp",
+    "characters/friend_krutikov_matvey_byl_v_gr_2112/photo_2.webp",
+    "characters/friend_krutikov_matvey_byl_v_gr_2112/photo_3.webp",
+    "characters/friend_krutikov_matvey_byl_v_gr_2112/photo_4.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_masha_bolshaya_gr_2212",
+   "name": "Маша Большая",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "МБ",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_masha_bolshaya_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_masha_bolshaya_gr_2212/photo_1.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_2.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_3.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_4.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_5.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_6.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_7.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_8.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_9.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_10.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_11.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_12.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_13.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_14.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_15.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_16.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_17.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_18.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_19.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_20.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_21.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_22.webp",
+    "characters/friend_masha_bolshaya_gr_2212/photo_23.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_masha_mal_gr_2212",
+   "name": "Маша Мал.",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "ММ",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_masha_mal_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_masha_mal_gr_2212/photo_1.webp",
+    "characters/friend_masha_mal_gr_2212/photo_2.webp",
+    "characters/friend_masha_mal_gr_2212/photo_3.webp",
+    "characters/friend_masha_mal_gr_2212/photo_4.webp",
+    "characters/friend_masha_mal_gr_2212/photo_5.webp",
+    "characters/friend_masha_mal_gr_2212/photo_6.webp",
+    "characters/friend_masha_mal_gr_2212/photo_7.webp",
+    "characters/friend_masha_mal_gr_2212/photo_8.webp",
+    "characters/friend_masha_mal_gr_2212/photo_9.webp",
+    "characters/friend_masha_mal_gr_2212/photo_10.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_misha_gr_2212",
+   "name": "Миша",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "М",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_misha_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_misha_gr_2212/photo_1.webp",
+    "characters/friend_misha_gr_2212/photo_2.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_nelya_studsovet",
+   "name": "Неля",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "Н",
+   "tags": [
+    "Студсовет"
+   ],
+   "photo": "characters/friend_nelya_studsovet/photo_1.webp",
+   "photos": [
+    "characters/friend_nelya_studsovet/photo_1.webp",
+    "characters/friend_nelya_studsovet/photo_2.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_niyaz_starosta_2110",
+   "name": "Нияз",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "Н",
+   "tags": [
+    "Староста 2110"
+   ],
+   "photo": "characters/friend_niyaz_starosta_2110/photo_1.webp",
+   "photos": [
+    "characters/friend_niyaz_starosta_2110/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_oleg_gr_2212",
+   "name": "Олег",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "О",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_oleg_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_oleg_gr_2212/photo_1.webp",
+    "characters/friend_oleg_gr_2212/photo_2.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_pelgasov_egor_byl_v_gr_2112",
+   "name": "Пельгасов Егор",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "ПЕ",
+   "tags": [
+    "Был в Гр 2112"
+   ],
+   "photo": "characters/friend_pelgasov_egor_byl_v_gr_2112/photo_1.webp",
+   "photos": [
+    "characters/friend_pelgasov_egor_byl_v_gr_2112/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_proskuryakov_gr_2212",
+   "name": "Проскуряков",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "П",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_proskuryakov_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_proskuryakov_gr_2212/photo_1.webp",
+    "characters/friend_proskuryakov_gr_2212/photo_2.webp",
+    "characters/friend_proskuryakov_gr_2212/photo_3.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_rustam_gr_2212",
+   "name": "Рустам",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "Р",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_rustam_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_rustam_gr_2212/photo_1.webp",
+    "characters/friend_rustam_gr_2212/photo_2.webp",
+    "characters/friend_rustam_gr_2212/photo_3.webp",
+    "characters/friend_rustam_gr_2212/photo_4.webp",
+    "characters/friend_rustam_gr_2212/photo_5.webp",
+    "characters/friend_rustam_gr_2212/photo_6.webp",
+    "characters/friend_rustam_gr_2212/photo_7.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_sabina_rezhisser_studsovet",
+   "name": "Сабина",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "С",
+   "tags": [
+    "Режиссёр, студсовет"
+   ],
+   "photo": "characters/friend_sabina_rezhisser_studsovet/photo_1.webp",
+   "photos": [
+    "characters/friend_sabina_rezhisser_studsovet/photo_1.webp",
+    "characters/friend_sabina_rezhisser_studsovet/photo_2.webp",
+    "characters/friend_sabina_rezhisser_studsovet/photo_3.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_sasha_studsovet",
+   "name": "Саша",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "С",
+   "tags": [
+    "Студсовет"
+   ],
+   "photo": "characters/friend_sasha_studsovet/photo_1.webp",
+   "photos": [
+    "characters/friend_sasha_studsovet/photo_1.webp",
+    "characters/friend_sasha_studsovet/photo_2.webp",
+    "characters/friend_sasha_studsovet/photo_3.webp",
+    "characters/friend_sasha_studsovet/photo_4.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_stella_gr_2212",
+   "name": "Стелла",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "С",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_stella_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_stella_gr_2212/photo_1.webp",
+    "characters/friend_stella_gr_2212/photo_2.webp",
+    "characters/friend_stella_gr_2212/photo_3.webp",
+    "characters/friend_stella_gr_2212/photo_4.webp",
+    "characters/friend_stella_gr_2212/photo_5.webp",
+    "characters/friend_stella_gr_2212/photo_6.webp",
+    "characters/friend_stella_gr_2212/photo_7.webp",
+    "characters/friend_stella_gr_2212/photo_8.webp",
+    "characters/friend_stella_gr_2212/photo_9.webp",
+    "characters/friend_stella_gr_2212/photo_10.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_sveta_gr_2212",
+   "name": "Света",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "С",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_sveta_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_sveta_gr_2212/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_vita_gr_2212",
+   "name": "Вита",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "В",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_vita_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_vita_gr_2212/photo_1.webp",
+    "characters/friend_vita_gr_2212/photo_2.webp",
+    "characters/friend_vita_gr_2212/photo_3.webp",
+    "characters/friend_vita_gr_2212/photo_4.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "friend_yarik_gr_2212",
+   "name": "Ярик",
+   "kind": "friend",
+   "bgPreset": 0,
+   "initials": "Я",
+   "tags": [
+    "Гр 2212"
+   ],
+   "photo": "characters/friend_yarik_gr_2212/photo_1.webp",
+   "photos": [
+    "characters/friend_yarik_gr_2212/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_anisimova_irina_viktorovna_matan",
+   "name": "Анисимова Ирина Викторовна",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "АИ",
+   "tags": [
+    "Матан"
+   ],
+   "photo": "characters/teacher_anisimova_irina_viktorovna_matan/photo_1.webp",
+   "photos": [
+    "characters/teacher_anisimova_irina_viktorovna_matan/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_borodin_vladimir_mihaylovich_termeh",
+   "name": "Бородин Владимир Михайлович",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "БВ",
+   "tags": [
+    "Термех"
+   ],
+   "photo": "characters/teacher_borodin_vladimir_mihaylovich_termeh/photo_1.webp",
+   "photos": [
+    "characters/teacher_borodin_vladimir_mihaylovich_termeh/photo_1.webp",
+    "characters/teacher_borodin_vladimir_mihaylovich_termeh/photo_2.webp",
+    "characters/teacher_borodin_vladimir_mihaylovich_termeh/photo_3.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_galimova_gulnara_arsenovna_kurator",
+   "name": "Галимова Гульнара Арсеновна",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "ГГ",
+   "tags": [
+    "Куратор"
+   ],
+   "photo": "characters/teacher_galimova_gulnara_arsenovna_kurator/photo_1.webp",
+   "photos": [
+    "characters/teacher_galimova_gulnara_arsenovna_kurator/photo_1.webp",
+    "characters/teacher_galimova_gulnara_arsenovna_kurator/photo_2.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_garaev_kavas_garaevich_pervyy_dekan_fmf",
+   "name": "Гараев Кавас Гараевич",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "ГК",
+   "tags": [
+    "Первый декан ФМФ"
+   ],
+   "photo": "characters/teacher_garaev_kavas_garaevich_pervyy_dekan_fmf/photo_1.webp",
+   "photos": [
+    "characters/teacher_garaev_kavas_garaevich_pervyy_dekan_fmf/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_gaynanova_aleksandra_vlentinovna_angl",
+   "name": "Гайнанова Александра Влентиновна",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "ГА",
+   "tags": [
+    "Англ"
+   ],
+   "photo": "characters/teacher_gaynanova_aleksandra_vlentinovna_angl/photo_1.webp",
+   "photos": [
+    "characters/teacher_gaynanova_aleksandra_vlentinovna_angl/photo_1.webp",
+    "characters/teacher_gaynanova_aleksandra_vlentinovna_angl/photo_2.webp",
+    "characters/teacher_gaynanova_aleksandra_vlentinovna_angl/photo_3.webp",
+    "characters/teacher_gaynanova_aleksandra_vlentinovna_angl/photo_4.webp",
+    "characters/teacher_gaynanova_aleksandra_vlentinovna_angl/photo_5.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_gaysin_almaz_fivzatovich_direktor_ifmpt",
+   "name": "Гайсин Алмаз Фивзатович",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "ГА",
+   "tags": [
+    "Директор ИФМПТ"
+   ],
+   "photo": "characters/teacher_gaysin_almaz_fivzatovich_direktor_ifmpt/photo_1.webp",
+   "photos": [
+    "characters/teacher_gaysin_almaz_fivzatovich_direktor_ifmpt/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_gubaydullin_rafael_kayumovich_fizika_lektsii",
+   "name": "Губайдуллин Рафаэль Каюмович",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "ГР",
+   "tags": [
+    "Физика, лекции"
+   ],
+   "photo": "characters/teacher_gubaydullin_rafael_kayumovich_fizika_lektsii/photo_1.webp",
+   "photos": [
+    "characters/teacher_gubaydullin_rafael_kayumovich_fizika_lektsii/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_ivanshin_petr_nikolaevich_infa",
+   "name": "Иваньшин Пётр Николаевич",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "ИП",
+   "tags": [
+    "Инфа"
+   ],
+   "photo": "characters/teacher_ivanshin_petr_nikolaevich_infa/photo_1.webp",
+   "photos": [
+    "characters/teacher_ivanshin_petr_nikolaevich_infa/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_kalyashina_anna_viktorovna_triz",
+   "name": "Каляшина Анна Викторовна",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "КА",
+   "tags": [
+    "ТРИЗ"
+   ],
+   "photo": "characters/teacher_kalyashina_anna_viktorovna_triz/photo_1.webp",
+   "photos": [
+    "characters/teacher_kalyashina_anna_viktorovna_triz/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_kirill_germanovich_ohotkin_rektor_knitu_kai",
+   "name": "Кирилл Германович Охоткин",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "КГ",
+   "tags": [
+    "Ректор КНИТУ-КАИ"
+   ],
+   "photo": "characters/teacher_kirill_germanovich_ohotkin_rektor_knitu_kai/photo_1.webp",
+   "photos": [
+    "characters/teacher_kirill_germanovich_ohotkin_rektor_knitu_kai/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_kochurova_svetlana_valerevna_byvshiy_prepod_po_anglu",
+   "name": "Кочурова Светлана Валерьевна",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "КС",
+   "tags": [
+    "Бывший препод по англу"
+   ],
+   "photo": "characters/teacher_kochurova_svetlana_valerevna_byvshiy_prepod_po_anglu/photo_1.webp",
+   "photos": [
+    "characters/teacher_kochurova_svetlana_valerevna_byvshiy_prepod_po_anglu/photo_1.webp",
+    "characters/teacher_kochurova_svetlana_valerevna_byvshiy_prepod_po_anglu/photo_2.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_sabitov_alfir_faridovich_mr_mistake_metrologiya",
+   "name": "Сабитов Альфир Фаридович",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "СА",
+   "tags": [
+    "Метрология",
+    "Mr Mistake"
+   ],
+   "photo": "characters/teacher_sabitov_alfir_faridovich_mr_mistake_metrologiya/photo_1.webp",
+   "photos": [
+    "characters/teacher_sabitov_alfir_faridovich_mr_mistake_metrologiya/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_scherbakov_aleksandr_vasilevich_inzhenerka",
+   "name": "Щербаков Александр Васильевич",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "ЩА",
+   "tags": [
+    "Инженерка"
+   ],
+   "photo": "characters/teacher_scherbakov_aleksandr_vasilevich_inzhenerka/photo_1.webp",
+   "photos": [
+    "characters/teacher_scherbakov_aleksandr_vasilevich_inzhenerka/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_shakirov_bulat_ruzalevich_fizika_laby",
+   "name": "Шакиров Булат Рузалевич",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "ШБ",
+   "tags": [
+    "Физика, лабы"
+   ],
+   "photo": "characters/teacher_shakirov_bulat_ruzalevich_fizika_laby/photo_1.webp",
+   "photos": [
+    "characters/teacher_shakirov_bulat_ruzalevich_fizika_laby/photo_1.webp",
+    "characters/teacher_shakirov_bulat_ruzalevich_fizika_laby/photo_2.webp",
+    "characters/teacher_shakirov_bulat_ruzalevich_fizika_laby/photo_3.webp",
+    "characters/teacher_shakirov_bulat_ruzalevich_fizika_laby/photo_4.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_sharipova_alina_albertovna_fizika_praktika",
+   "name": "Шарипова Алина Альбертовна",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "ША",
+   "tags": [
+    "Физика, практика"
+   ],
+   "photo": "characters/teacher_sharipova_alina_albertovna_fizika_praktika/photo_1.webp",
+   "photos": [
+    "characters/teacher_sharipova_alina_albertovna_fizika_praktika/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_tazeeva_elvira_ildarovna_zam_direktora_ifmpt_dekanat",
+   "name": "Тазеева Эльвира Ильдаровна",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "ТЭ",
+   "tags": [
+    "Зам директора ИФМПТ (деканат)"
+   ],
+   "photo": "characters/teacher_tazeeva_elvira_ildarovna_zam_direktora_ifmpt_dekanat/photo_1.webp",
+   "photos": [
+    "characters/teacher_tazeeva_elvira_ildarovna_zam_direktora_ifmpt_dekanat/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_tsareva_albina_maratovna_zam_direktora_ifmpt",
+   "name": "Царева Альбина Маратовна",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "ЦА",
+   "tags": [
+    "Зам директора ИФМПТ"
+   ],
+   "photo": "characters/teacher_tsareva_albina_maratovna_zam_direktora_ifmpt/photo_1.webp",
+   "photos": [
+    "characters/teacher_tsareva_albina_maratovna_zam_direktora_ifmpt/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
+  },
+  {
+   "id": "teacher_valeeva_alina_ravilevna_matved",
+   "name": "Валеева Алина Равилевна",
+   "kind": "teacher",
+   "bgPreset": 1,
+   "initials": "ВА",
+   "tags": [
+    "Матвед"
+   ],
+   "photo": "characters/teacher_valeeva_alina_ravilevna_matved/photo_1.webp",
+   "photos": [
+    "characters/teacher_valeeva_alina_ravilevna_matved/photo_1.webp"
+   ],
+   "sounds": {
+    "win": null,
+    "skip": null
+   },
+   "placeholder": false
   }
  ]
 }

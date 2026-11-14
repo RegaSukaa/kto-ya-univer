@@ -16,8 +16,10 @@ import com.kstoya.univer.game.RoundInfo
 import com.kstoya.univer.ui.components.CharacterCard
 import com.kstoya.univer.ui.components.toCardModel
 import com.kstoya.univer.ui.screens.HomeScreen
+import com.kstoya.univer.ui.screens.LibraryScreen
 import com.kstoya.univer.ui.screens.ReviewScreen
 import com.kstoya.univer.ui.theme.KtoYaTheme
+import org.json.JSONObject
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -56,6 +58,45 @@ class ScreenshotTest {
         tag2 = "строгий", kind = "teacher", bgPreset = 2,
         initials = "ДС", assetPhoto = "characters/teacher_smirnov.png", placeholder = true, source = "assets"
     )
+
+    private fun realPeople(limit: Int): List<CharacterEntity> {
+        val ctx = androidx.test.core.app.ApplicationProvider.getApplicationContext<android.content.Context>()
+        val json = JSONObject(ctx.assets.open("characters.json").bufferedReader().use { it.readText() })
+        val arr = json.getJSONArray("characters")
+        return (0 until minOf(limit, arr.length())).map { i ->
+            val o = arr.getJSONObject(i)
+            val photos = o.getJSONArray("photos")
+            val paths = (0 until photos.length()).map { photos.getString(it) }
+            CharacterEntity(
+                id = o.getString("id"),
+                name = o.getString("name"),
+                tag1 = o.optJSONArray("tags")?.optString(0)?.takeIf { it.isNotBlank() },
+                kind = o.getString("kind"),
+                initials = o.optString("initials"),
+                assetPhoto = paths.first(),
+                assetPhotos = paths.joinToString("\u0001"),
+                source = "assets",
+                createdAt = i.toLong()
+            )
+        }
+    }
+
+    @Test
+    fun libraryWithRealPeople() {
+        val people = realPeople(6)
+        compose.setContent {
+            KtoYaTheme(dark = true) {
+                LibraryScreen(
+                    characters = people,
+                    onBack = {},
+                    onExport = { _, _ -> null },
+                    onImport = { _, _ -> },
+                    onApplyImport = { _, _, _ -> }
+                )
+            }
+        }
+        save("s2_library")
+    }
 
     @Test
     fun homeWithLogo() {

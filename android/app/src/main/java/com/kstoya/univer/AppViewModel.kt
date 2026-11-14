@@ -208,13 +208,16 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 sounds.play("ding", volume = 0.8f, settings = s)
             }
         }
+        val goVoiceAudible = sounds.hasBank("go") && s.voiceVolume > 0.05f
         when (e.phase) {
             LocalPhase.COUNTDOWN -> {
                 val d = e.countdownDigit(now)
                 if (d != lastDigit) {
                     lastDigit = d
-                    if (d in 1..3) sounds.play("tick", 0.8f, s)
-                    if (d == 0) sounds.play("go", settings = s)
+                    if (!goVoiceAudible) {
+                        if (d in 1..3) sounds.play("tick", 0.8f, s)
+                        if (d == 0) sounds.play("go", settings = s)
+                    }
                 }
             }
             LocalPhase.SHOW -> {
@@ -245,10 +248,10 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             if (d != lastReshowDigit) {
                 lastReshowDigit = d
                 if (d in 1..3) {
-                    sounds.play("tick", 0.8f, s)
+                    if (!(sounds.hasBank("go") && s.voiceVolume > 0.05f)) sounds.play("tick", 0.8f, s)
                     Haptics.tick(ctx, s.vibrate)
                 }
-                if (d == 0) sounds.play("go", settings = s)
+                if (d == 0 && !(sounds.hasBank("go") && s.voiceVolume > 0.05f)) sounds.play("go", settings = s)
             }
         } else {
             val left = e.showMs - (elapsed - COUNTDOWN_MS)
@@ -325,6 +328,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         reshowStart = SystemClock.elapsedRealtime()
         lastReshowDigit = -1
         lastReshowSec = -1
+        sounds.playVoice("go", settings.value)
         emit(reshowStart)
     }
 

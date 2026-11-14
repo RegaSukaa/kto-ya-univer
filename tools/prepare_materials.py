@@ -35,7 +35,9 @@ KIND_MAP = {
     "профессор": "teacher",
 }
 PHOTO_EXT = {".jpg", ".jpeg", ".png", ".webp"}
-VOICE_EXT = {".m4a", ".wav", ".mp3"}
+VOICE_EXT = {".m4a", ".wav", ".mp3", ".ogg", ".opus"}
+FLAG_PREFIXES = ("партия_", "без_подписи_", "без_имени")
+PHOTO_DIRS = ("фото", "photos", "Студенты", "Преподы", "Преподаватели", "Преподователи")
 
 
 def slug(text: str) -> str:
@@ -56,19 +58,30 @@ def read_csv(path: Path):
     return rows
 
 
+def find_photo_dir(mat: Path, folder: str) -> Path | None:
+    for base in PHOTO_DIRS:
+        candidate = mat / base / folder
+        if candidate.is_dir():
+            return candidate
+    return None
+
+
 def copy_photos(src_dir: Path, dst_dir: Path) -> list[str]:
     dst_dir.mkdir(parents=True, exist_ok=True)
     photos = []
-    files = sorted(p for p in src_dir.iterdir() if p.suffix.lower() in PHOTO_EXT)
+    files = sorted(
+        p for p in src_dir.iterdir()
+        if p.suffix.lower() in PHOTO_EXT and not p.name.lower().startswith(FLAG_PREFIXES)
+    )
     for i, src in enumerate(files, start=1):
         img = Image.open(src)
         img = img.convert("RGBA")
         long_side = max(img.size)
-        if long_side > 1024:
-            ratio = 1024 / long_side
+        if long_side > 900:
+            ratio = 900 / long_side
             img = img.resize((max(1, int(img.width * ratio)), max(1, int(img.height * ratio))), Image.LANCZOS)
-        out = dst_dir / f"photo_{i}.png"
-        img.save(out, "PNG")
+        out = dst_dir / f"photo_{i}.webp"
+        img.save(out, "WEBP", quality=82, method=6)
         photos.append(out)
     return photos
 
@@ -77,6 +90,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--materials", default=str(ROOT / "materials"))
     ap.add_argument("--assets", default=str(ROOT / "android/app/src/main/assets"))
+    ap.add_argument("--replace", action="store_true", help="начать манифест с нуля (убрать старые заглушки)")
     args = ap.parse_args()
 
     mat = Path(args.materials)
@@ -92,6 +106,8 @@ def main() -> int:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {
         "format": "ktya-assets/1", "version": 1, "characters": []
     }
+    if args.replace:
+        manifest["characters"] = []
     by_id = {c["id"]: c for c in manifest["characters"]}
     imported_photos = 0
     imported_people = 0
@@ -108,12 +124,10 @@ def main() -> int:
             print(f"неизвестный тип '{kind_raw}' у {name}, считаю студентом")
             kind = "friend"
         person_id = f"{kind}_{slug(folder)}"
-        src_dir = mat / "фото" / folder
-        if not src_dir.exists():
-            src_dir = mat / "photos" / folder
-        photos = copy_photos(src_dir, assets / "characters" / person_id) if src_dir.exists() else []
+        src_dir = find_photo_dir(mat, folder)
+        photos = copy_photos(src_dir, assets / "characters" / person_id) if src_dir else []
         if not photos:
-            print(f"у {name} нет фото в {src_dir}")
+            print(f"ПРОПУСК: у {name} нет отдельных фото ({src_dir})")
             continue
         rel = [f"characters/{person_id}/{p.name}" for p in photos]
         tags = [row.get("тег1"), row.get("тег2"), row.get("тег3")]
@@ -167,6 +181,7 @@ def main() -> int:
                 voices += 1
 
     print(f"\nИтого: людей {imported_people}, фото {imported_photos}, голосов {voices}")
+    print(f"В манифесте всего: {len(manifest['characters'])}")
     print(f"manifest: {manifest_path}")
     return 0
 
